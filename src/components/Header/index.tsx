@@ -1,5 +1,6 @@
 import * as S from "./styles";
 import { Logo } from './../Logo';
+import { Link } from "react-router-dom";
 
 export const Header = () => {
     return (
@@ -13,10 +14,12 @@ export const Header = () => {
                     <a>Sobre nós</a>
                 </li>
                 <li>
-                    <a>Contatos</a>
+                    <a>Membros</a>
                 </li>
             </S.Menu>
-            <S.LoginButton> Entrar </S.LoginButton>
+            <Link to="/dashboard">
+                <S.LoginButton> Entrar </S.LoginButton>
+            </Link>
         </S.Wrapper>
     )
 }
