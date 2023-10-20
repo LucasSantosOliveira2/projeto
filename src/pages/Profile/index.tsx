@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 
-export const Dashboard = () => {
+export const Profile = () => {
     return (
         <S.Wrapper>
             <Sidebar />

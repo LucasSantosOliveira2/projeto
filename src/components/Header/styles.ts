@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom';
+
 
 export const Wrapper = styled.header`
     display: flex;
@@ -57,3 +59,8 @@ export const Menu = styled.ul`
         }
     }
 `
+
+export const StyledLink = styled(Link)`
+  text-decoration: none; 
+  color: inherit;
+`;

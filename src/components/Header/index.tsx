@@ -1,6 +1,5 @@
 import * as S from "./styles";
 import { Logo } from './../Logo';
-import { Link } from "react-router-dom";
 
 export const Header = () => {
     return (
@@ -8,18 +7,25 @@ export const Header = () => {
             <Logo name="ChatBot" />
             <S.Menu>
                 <li>
-                    <a>Home</a>
+                    <S.StyledLink to="/" >
+                        Home
+                    </S.StyledLink>
                 </li>
+
                 <li>
                     <a>Sobre nós</a>
                 </li>
+
                 <li>
-                    <a>Membros</a>
+                    <S.StyledLink to="/members" >
+                        Membros
+                    </S.StyledLink>
+
                 </li>
             </S.Menu>
-            <Link to="/dashboard">
+            <S.StyledLink to="/dashboard">
                 <S.LoginButton> Entrar </S.LoginButton>
-            </Link>
+            </S.StyledLink>
         </S.Wrapper>
     )
 }
