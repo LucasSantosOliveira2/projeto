@@ -1,17 +1,33 @@
 import { useState, useEffect } from 'react';
 import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
-import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare } from "react-icons/bi";
+import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare, BiSolidFolder, BiSolidExit } from "react-icons/bi";
 import { useLocation } from 'react-router-dom';
+import { SecondSidebar } from '../SecondSidebar';
+import { IoMdAnalytics } from "react-icons/io";
 
 
+IoMdAnalytics
 export const Sidebar = () => {
 
     const location = useLocation();
-    const [activeItem, setActiveItem] = useState('dashboard');
+    const [activeItem, setActiveItem] = useState('project');
+
+    const [isSecondSidebarVisible, setSecondSidebarVisible] = useState(false);
+
+    const showSecondSidebar = () => {
+        setSecondSidebarVisible(true);
+    };
+
+    const hideSecondSidebar = () => {
+        setSecondSidebarVisible(false);
+    };
 
     useEffect(() => {
         switch (location.pathname) {
+            case '/project':
+                setActiveItem('project');
+                break;
             case '/dashboard':
                 setActiveItem('dashboard');
                 break;
@@ -21,8 +37,11 @@ export const Sidebar = () => {
             case '/profile':
                 setActiveItem('profile');
                 break;
+            case '/analysis':
+                setActiveItem('analysis');
+                break;
             default:
-                setActiveItem('dashboard');
+                setActiveItem('project');
         }
     }, [location]);
 
@@ -34,12 +53,29 @@ export const Sidebar = () => {
         <S.Wrapper>
             <S.Title>Olá, Lucas</S.Title>
             <S.Separator />
+            <S.ButtonCreateProject onClick={showSecondSidebar}>Criar Projeto</S.ButtonCreateProject>
+            <S.StyledLink to="/project">
+                <SidebarItem
+                    icon={<BiSolidFolder />}
+                    name="Projetos"
+                    isActive={activeItem === 'project'}
+                    onClick={() => handleItemClick('project')}
+                />
+            </S.StyledLink>
             <S.StyledLink to="/dashboard">
                 <SidebarItem
                     icon={<BiSolidDashboard />}
                     name="Dashboard"
                     isActive={activeItem === 'dashboard'}
                     onClick={() => handleItemClick('dashboard')}
+                />
+            </S.StyledLink>
+            <S.StyledLink to="/analysis">
+                <SidebarItem
+                    icon={<IoMdAnalytics />}
+                    name="Análise"
+                    isActive={activeItem === 'analysis'}
+                    onClick={() => handleItemClick('analysis')}
                 />
             </S.StyledLink>
             <S.StyledLink to="/statistics">
@@ -58,6 +94,13 @@ export const Sidebar = () => {
                     onClick={() => handleItemClick('profile')}
                 />
             </S.StyledLink>
+            <S.StyledLink to="/">
+                <SidebarItem
+                    icon={<BiSolidExit />}
+                    name="Sair"
+                />
+            </S.StyledLink>
+            <SecondSidebar $visible={isSecondSidebarVisible} onHide={hideSecondSidebar} />
         </S.Wrapper>
     );
 };

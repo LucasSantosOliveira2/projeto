@@ -6,12 +6,16 @@ import Malcom from "../../assets/Images/malcom.jpeg"
 
 function mapPathToPageName(path: string) {
     switch (path) {
+        case '/project':
+            return 'Projetos';
         case '/dashboard':
             return 'Dashboard';
         case '/statistics':
             return 'Estatísticas';
         case '/profile':
             return 'Perfil';
+        case '/analysis':
+            return 'Análise';
         default:
             return 'Página não encontrada';
     }
@@ -33,7 +37,7 @@ export const HeaderDashboard = () => {
                 <S.Menu>
                     <S.InputContainer>
                         <FaSearch />
-                        <S.Input placeholder="Busca" />
+                        <S.Input placeholder="Busca" type="text" id="Busca" name="Busca" />
                     </S.InputContainer>
                     <S.BurguerMenu>
                         <ImMenu />

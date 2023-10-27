@@ -23,7 +23,7 @@ export const Header = () => {
 
                 </li>
             </S.Menu>
-            <S.StyledLink to="/dashboard">
+            <S.StyledLink to="/signin">
                 <S.LoginButton> Entrar </S.LoginButton>
             </S.StyledLink>
         </S.Wrapper>

@@ -13,6 +13,22 @@ export const Wrapper = styled.aside`
         display: none;
     }
 `
+export const ButtonCreateProject = styled.button`
+  width: 150px;
+  height: 40px;
+  border-radius: 16px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  background: #7551FF;
+  border: none;
+  margin-left: 75px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  &:hover{
+      transform: scale(1.1);
+    }
+  `
 
 export const Title = styled.h1`
     text-align: center;

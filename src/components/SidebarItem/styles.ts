@@ -10,10 +10,4 @@ export const Wrapper = styled.div`
     line-height: 1.8rem;
     font-weight: 500;
     color:${(props) => props.theme.colors.white};
-
-    &:hover{
-        margin-right: 25px;
-        border-right: 4px solid #7551FF;
-        font-weight: 700;
-    }
 `

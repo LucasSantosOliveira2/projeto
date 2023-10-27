@@ -4,7 +4,7 @@ type ItemProps = {
     icon?: React.ReactNode;
     name: string
     isActive?: boolean
-    onClick: () => void
+    onClick?: () => void
 }
 
 export const SidebarItem = ({ icon, name, isActive, onClick }: ItemProps) => {
