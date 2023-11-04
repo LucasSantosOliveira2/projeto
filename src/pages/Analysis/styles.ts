@@ -4,6 +4,7 @@ export const Wrapper = styled.section`
   display: flex;
   background-color: #0B1437;
   width: 100%;
+  height: 100vh;
 `
 export const SidebarContainer = styled.div`
   flex: 1;

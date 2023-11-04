@@ -12,7 +12,6 @@ function ProjectForm(props: ProjectFormProps) {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [analystNames, setAnalystNames] = useState(['']);
   const [participants, setParticipants] = useState(1);
-  const [tasks, setTasks] = useState(1);
   const [tasksNames, setTasksNames] = useState(['']);
 
   const addAnalyst = () => {
@@ -34,19 +33,8 @@ function ProjectForm(props: ProjectFormProps) {
   const decrementParticipants = () => {
     setParticipants((prev) => (prev > 1 ? prev - 1 : prev));
   }
-
-  const incrementTasks = () => {
-    setTasks((prev) => prev + 1);
-  }
-
   const addTasks = () => {
     setTasksNames([...tasksNames, '']);
-  }
-
-  const decrementTasks = () => {
-    if (tasks > 1) {
-      setTasks((prev) => (prev > 1 ? prev - 1 : prev));
-    }
   }
 
   const removeTasks = (index: number) => {

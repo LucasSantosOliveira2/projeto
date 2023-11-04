@@ -1,4 +1,3 @@
-// Em Forms.js
 import { useState } from 'react';
 import * as S from './styles';
 import { Sidebar } from '../../components/Sidebar';
@@ -12,6 +11,10 @@ export const Forms = () => {
         setCurrentForm('second');
     };
 
+    const switchToProjectForm = () => {
+        setCurrentForm('project');
+    };
+
     return (
         <S.Wrapper>
             <S.SidebarContainer>
@@ -22,7 +25,7 @@ export const Forms = () => {
                 {currentForm === 'project' ? (
                     <ProjectForm switchToSecondForm={switchToSecondForm} />
                 ) : currentForm === 'second' ? (
-                    <SecondForm />
+                    <SecondForm switchToProjectForm={switchToProjectForm} />
                 ) : null}
             </S.ContentContainer>
         </S.Wrapper>

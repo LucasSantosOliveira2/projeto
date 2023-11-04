@@ -12,7 +12,7 @@ export const Form = styled.form`
   padding: 20px 20px;
   background-color:#111C44;
   border-radius: 16px;
- 
+  margin-bottom: 20px;
 `
 export const FormContainer = styled.div`
   width: 100%;

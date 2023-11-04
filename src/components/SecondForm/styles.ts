@@ -5,10 +5,10 @@ export const Form = styled.form`
   flex-direction: column;
   background-color: inherit;
   width: 80%;
-  gap: 20px;
   padding: 20px 20px;
   background-color:#111C44;
   border-radius: 16px;
+  margin-bottom: 30px;
 `
 export const FormContainer = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ export const FieldContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
 `
 
 export const Title = styled.h1`
@@ -41,7 +41,7 @@ export const Title = styled.h1`
 `
 export const ButtonSave = styled.button`
   width: 100%;
-  max-width: 360px;
+  max-width: 180px;
   height: 40px;
   border-radius: 16px;
   color: white;
@@ -50,4 +50,12 @@ export const ButtonSave = styled.button`
   background: #7551FF;
   border: none;
   padding: 10px 10px;
+`
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  justify-content: space-evenly;
 `

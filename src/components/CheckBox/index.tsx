@@ -6,10 +6,16 @@ import * as S from './styles';
 export const Checkbox = ({ name }: { name: string }) => {
     const [isChecked, setChecked] = useState(false);
 
-    const handleCheckboxChange = () => {
+    /*const handleCheckboxChange = () => {
         setChecked(!isChecked);
+    }*/
+    const handleCheckboxChange = () => {
+        if (name === "Texto") {
+            setChecked(!isChecked);
+        } else {
+            setChecked(false);
+        }
     }
-
     return (
         <S.Label>
             <input

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.aside`
     width: 300px;
-    height: 100vh;
+    height: 100%;
     background-color:#111C44;
     padding-top: 40px;
     border-right: 1px solid white;
@@ -25,6 +25,7 @@ export const ButtonCreateProject = styled.button`
   margin-left: 75px;
   margin-top: 10px;
   margin-bottom: 10px;
+
   &:hover{
       transform: scale(1.1);
     }
