@@ -3,7 +3,6 @@ import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
 import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare, BiSolidFolder, BiSolidExit } from "react-icons/bi";
 import { useLocation } from 'react-router-dom';
-import { SecondSidebar } from '../SecondSidebar';
 import { IoMdAnalytics } from "react-icons/io";
 
 
@@ -12,16 +11,6 @@ export const Sidebar = () => {
 
     const location = useLocation();
     const [activeItem, setActiveItem] = useState('project');
-
-    const [isSecondSidebarVisible, setSecondSidebarVisible] = useState(false);
-
-    const showSecondSidebar = () => {
-        setSecondSidebarVisible(true);
-    };
-
-    const hideSecondSidebar = () => {
-        setSecondSidebarVisible(false);
-    };
 
     useEffect(() => {
         switch (location.pathname) {
@@ -53,7 +42,10 @@ export const Sidebar = () => {
         <S.Wrapper>
             <S.Title>Olá, Lucas</S.Title>
             <S.Separator />
-            <S.ButtonCreateProject onClick={showSecondSidebar}>Criar Projeto</S.ButtonCreateProject>
+            <S.StyledLink to="/forms">
+                <S.ButtonCreateProject >Criar Projeto</S.ButtonCreateProject>
+            </S.StyledLink>
+
             <S.StyledLink to="/project">
                 <SidebarItem
                     icon={<BiSolidFolder />}
@@ -100,7 +92,6 @@ export const Sidebar = () => {
                     name="Sair"
                 />
             </S.StyledLink>
-            <SecondSidebar $visible={isSecondSidebarVisible} onHide={hideSecondSidebar} />
         </S.Wrapper>
     );
 };

@@ -7,6 +7,7 @@ import { Members } from './pages/Members';
 import { Project } from './pages/Project';
 import { SignIn } from './pages/SignIn';
 import { Analysis } from './pages/Analysis';
+import { Forms } from './pages/Forms';
 
 function MainRoutes() {
     return (
@@ -19,6 +20,8 @@ function MainRoutes() {
             <Route path="/members" element={<Members />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/analysis" element={<Analysis />} />
+            <Route path="/forms" element={<Forms />} />
+            <Route path="/secondform" element={<Forms />} />
 
         </Routes>
     )
