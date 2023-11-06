@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.aside`
     width: 300px;
+    min-height: 100vh;
     height: 100%;
     background-color:#111C44;
     padding-top: 40px;

@@ -4,7 +4,7 @@ import { HiMiniBackspace } from "react-icons/hi2";
 
 type WrapperProps = {
   $visible: boolean;
-};
+}
 
 export const Wrapper = styled.aside<WrapperProps>`
   position: absolute;
@@ -19,7 +19,7 @@ export const Wrapper = styled.aside<WrapperProps>`
   @media screen and (max-width: 1200px) {
     display: none;
   }
-`;
+`
 
 export const ContainerButton = styled.div`
     width: 100%;
@@ -32,8 +32,7 @@ export const ContainerButton = styled.div`
 `
 export const IconBack = styled(HiMiniBackspace)`
   font-size: 1.5rem;
-`;
-
+`
 
 export const Title = styled.h1`
     text-align: center;
@@ -49,9 +48,9 @@ export const Separator = styled.div`
   height: 1px; 
   background: rgba(255, 255, 255, 0.10);
     margin: 10px 0; 
-`;
+`
 
 export const StyledLink = styled(Link)`
   text-decoration: none; 
   color: inherit;
-`;
+`

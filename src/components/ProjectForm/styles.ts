@@ -13,6 +13,9 @@ export const Form = styled.form`
   background-color:#111C44;
   border-radius: 16px;
   margin-bottom: 20px;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
 `
 export const FormContainer = styled.div`
   width: 100%;
@@ -41,8 +44,8 @@ export const Input = styled.input`
   height: 40px;
   padding: 10px 10px;
   border-radius: 8px;
-  outline: none;
   border: none;
+  outline: none;
 `
 export const TextArea = styled.textarea`
   width: 100%;
@@ -78,6 +81,7 @@ export const AnalitcsContainer = styled.div`
   align-items: center;
   padding-right: 10px;
   border-radius: 8px;
+ 
 `
 
 export const CustomIcon = styled(FaDeleteLeft)`
@@ -123,3 +127,25 @@ export const StyledLink = styled(Link)`
 `
 export const TaskContainer = styled(AnalitcsContainer)`
 `
+
+export const Error = styled.p`
+ font-size: 0.875rem;
+ color:white;
+ font-weight: 500;
+`
+export const InputNumber = styled.input`
+  width: 100%;
+  max-width: 60px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  height: 30px;
+  outline:none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  `
