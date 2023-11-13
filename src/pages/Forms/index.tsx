@@ -7,7 +7,8 @@ import { ThirdForm } from '../../components/ThirdForm';
 
 export const Forms = () => {
     const [currentForm, setCurrentForm] = useState('project');
-    const [numTasks, setNumTasks] = useState(0);
+
+
 
     const switchToProjectForm = () => {
         setCurrentForm('project');
@@ -17,9 +18,8 @@ export const Forms = () => {
         setCurrentForm('second');
     }
 
-    const switchToThirdForm = (numTasks: number) => {
+    const switchToThirdForm = () => {
         setCurrentForm('third');
-        setNumTasks(numTasks);
     };
 
     return (
@@ -30,13 +30,11 @@ export const Forms = () => {
 
             <S.ContentContainer>
                 {currentForm === 'project' ? (
-                    <ProjectForm switchToSecondForm={switchToSecondForm} switchToThirdForm={switchToThirdForm} />
+                    <ProjectForm switchToSecondForm={switchToSecondForm} />
                 ) : currentForm === 'second' ? (
                     <SecondForm switchToProjectForm={switchToProjectForm} switchToThirdForm={switchToThirdForm} />
                 ) : currentForm === 'third' ? (
-                    Array.from({ length: numTasks }, (_, index) => (
-                        <ThirdForm key={index} switchToSecondForm={switchToSecondForm} />
-                    ))
+                    <ThirdForm switchToSecondForm={switchToSecondForm} />
                 ) : null}
             </S.ContentContainer>
         </S.Wrapper>

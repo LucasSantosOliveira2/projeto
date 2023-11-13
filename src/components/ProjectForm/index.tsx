@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 type ProjectFormProps = {
   switchToSecondForm: () => void,
-  switchToThirdForm: (numTasks: number) => void;
 }
 
 type FormProps = z.infer<typeof SchemaForm>
@@ -67,8 +66,6 @@ function ProjectForm(props: ProjectFormProps) {
   const handleFormSubmit = (data: FormProps) => {
     console.log(data);
     props.switchToSecondForm();
-    const numTasks = tasksNames.length;
-    props.switchToThirdForm(numTasks);
   }
 
 
