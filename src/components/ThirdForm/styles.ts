@@ -70,3 +70,9 @@ export const ButtonContainer = styled.div`
   max-width: 480px;
   justify-content: space-evenly;
 `
+
+export const Error = styled.p`
+ font-size: 0.875rem;
+ color:white;
+ font-weight: 500;
+`

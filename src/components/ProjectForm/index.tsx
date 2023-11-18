@@ -69,8 +69,6 @@ function ProjectForm(props: ProjectFormProps) {
   }
 
 
-  //console.log(errors);
-
   return (
     <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
       <S.FormContainer>
@@ -144,7 +142,7 @@ function ProjectForm(props: ProjectFormProps) {
               <S.TaskContainer>
                 <S.Input
                   placeholder="Informe a tarefa"
-                  {...register(`information.tasksName.[${index}]`)}
+                  {...register(`information.tasksName.${index}`)}
                   type="text"
                   defaultValue={task}
                 />

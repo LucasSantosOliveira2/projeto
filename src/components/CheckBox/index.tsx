@@ -1,29 +1,35 @@
-
-import { useState } from "react";
 import * as S from './styles';
+import { ChangeEvent } from 'react';
+
+type CheckboxProps = {
+    checkboxName: string,
+    checkboxType: string,
+    register: any,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+
+}
+
+const optionsDisabled = ['Voz', 'Mousetrack', 'Video'];
 
 
-export const Checkbox = ({ name }: { name: string }) => {
-    const [isChecked, setChecked] = useState(false);
+export const Checkbox = ({ checkboxType, checkboxName, register, onChange }: CheckboxProps) => {
+    const isOptionDisabled = optionsDisabled.includes(checkboxName);
 
-    /*const handleCheckboxChange = () => {
-        setChecked(!isChecked);
-    }*/
-    const handleCheckboxChange = () => {
-        if (name === "Texto") {
-            setChecked(!isChecked);
-        } else {
-            setChecked(false);
-        }
-    }
+
     return (
         <S.Label>
             <input
                 type="checkbox"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
+                {...register(checkboxType)}
+                onChange={(e) => {
+                    if (!isOptionDisabled) {
+                        onChange?.(e);
+                    }
+                }}
+                disabled={isOptionDisabled}
+
             />
-            {name}
+            {checkboxName}
         </S.Label>
     );
 }

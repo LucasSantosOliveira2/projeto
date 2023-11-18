@@ -8,8 +8,6 @@ import { ThirdForm } from '../../components/ThirdForm';
 export const Forms = () => {
     const [currentForm, setCurrentForm] = useState('project');
 
-
-
     const switchToProjectForm = () => {
         setCurrentForm('project');
     }
