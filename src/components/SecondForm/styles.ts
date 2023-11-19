@@ -10,7 +10,7 @@ export const Form = styled.form`
   border-radius: 16px;
   margin-bottom: 30px;
   min-height: 100vh;
-  height: auto;
+  height: 100%;
   overflow-y: auto;
 `
 export const FormContainer = styled.div`
@@ -21,12 +21,10 @@ export const FormContainer = styled.div`
   gap: 25px;
 `
 export const Label = styled.label`
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: white;
     font-weight: 500;
-    text-align: left;
 `
-
 export const FieldContainer = styled.div`
     width: 100%;
     max-width: 480px;
@@ -34,7 +32,16 @@ export const FieldContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
+`
+export const TextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  resize: none;
 `
 
 export const Title = styled.h1`
@@ -42,6 +49,7 @@ export const Title = styled.h1`
     font-weight: 700;
     color: white;
 `
+
 export const ButtonSave = styled.button`
   width: 100%;
   max-width: 180px;
@@ -62,6 +70,7 @@ export const ButtonContainer = styled.div`
   max-width: 480px;
   justify-content: space-evenly;
 `
+
 export const Error = styled.p`
  font-size: 0.875rem;
  color:white;

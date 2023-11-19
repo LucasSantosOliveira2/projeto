@@ -38,7 +38,6 @@ export const FieldContainer = styled.div`
     justify-content: center;
     gap: 8px;
 `
-
 export const Input = styled.input`
   width: 100%;
   height: 40px;
@@ -56,13 +55,11 @@ export const TextArea = styled.textarea`
   border: none;
   resize: none;
 `
-
 export const Title = styled.h1`
     font-size: 2rem;
     font-weight: 700;
     color: white;
 `
-
 export const InfoContainer = styled.div`
   width: 100%;
   max-width: 480px;
@@ -71,7 +68,6 @@ export const InfoContainer = styled.div`
   gap: 5px;
   color: white;
 `
-
 export const AnalitcsContainer = styled.div`
   width: 100%;
   max-width: 480px;
@@ -83,12 +79,10 @@ export const AnalitcsContainer = styled.div`
   border-radius: 8px;
  
 `
-
 export const CustomIcon = styled(FaDeleteLeft)`
   font-size: 1.2rem; 
   color: #7551FF;       
 `
-
 export const ButtonAnalyst = styled.button`
   width: 100%;
   height: 40px;
@@ -100,7 +94,6 @@ export const ButtonAnalyst = styled.button`
   border: none;
   padding: 10px 10px;
 `
-
 export const ButtonSave = styled.button`
   width: 100%;
   max-width: 360px;
@@ -113,21 +106,18 @@ export const ButtonSave = styled.button`
   border: none;
   padding: 10px 10px;
 `
-
 export const Number = styled.h1`
     font-size: 1.25rem;
     color: white;
     font-weight: 500;
 
 `
-
 export const StyledLink = styled(Link)`
   text-decoration: none; 
   color: inherit;
 `
 export const TaskContainer = styled(AnalitcsContainer)`
 `
-
 export const Error = styled.p`
  font-size: 0.875rem;
  color:white;

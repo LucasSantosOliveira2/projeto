@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Checkbox } from "../CheckBox";
 
 type ProjectFormProps = {
   switchToSecondForm: () => void,
@@ -17,7 +18,27 @@ const SchemaForm = z.object({
     numParticipants: z.number().int().min(1, 'Número de participantes deve ser mínimo 1'),
     analystName: z.record(z.string().min(1, 'Informe o nome do Analista')),
     tasksName: z.record(z.string().min(1, 'Informe a tarefa do projeto'))
-  })
+  }),
+  type: z.object({
+    video: z.boolean(),
+    texto: z.boolean(),
+    voz: z.boolean(),
+    mousetrack: z.boolean(),
+  }).refine(data => {
+    const { video, texto, voz, mousetrack } = data;
+    return video || texto || voz || mousetrack;
+  }, {
+    message: 'Selecione pelo menos uma opção',
+  }),
+  feelings: z.object({
+    outros: z.boolean(),
+    nojo: z.boolean(),
+    alegria: z.boolean(),
+    tristeza: z.boolean(),
+    medo: z.boolean(),
+    surpresa: z.boolean(),
+    raiva: z.boolean(),
+  }),
 });
 
 
@@ -33,9 +54,26 @@ function ProjectForm(props: ProjectFormProps) {
         numParticipants: 0,
         analystName: {},
         tasksName: {}
+      },
+      type: {
+        video: false,
+        texto: false,
+        voz: false,
+        mousetrack: false,
+      },
+      feelings: {
+        outros: false,
+        nojo: false,
+        alegria: false,
+        tristeza: false,
+        medo: false,
+        surpresa: false,
+        raiva: false,
       }
     }
   });
+
+
   const [analystNames, setAnalystNames] = useState(['']);
   const [tasksNames, setTasksNames] = useState(['']);
 
@@ -68,6 +106,19 @@ function ProjectForm(props: ProjectFormProps) {
     props.switchToSecondForm();
   }
 
+  const [typeState, setTypeState] = useState({
+    video: false,
+    texto: false,
+    voz: false,
+    mousetrack: false,
+  });
+
+  const handleTypeCheckboxChange = (type: keyof typeof typeState) => {
+    setTypeState((prevState) => ({
+      ...prevState,
+      [type]: !prevState[type],
+    }));
+  };
 
   return (
     <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -95,6 +146,7 @@ function ProjectForm(props: ProjectFormProps) {
             <S.Error>{errors.information?.projectGoal?.message}</S.Error>
           )}
         </S.FieldContainer>
+
         <S.FieldContainer>
           <S.Label>Analistas do projeto</S.Label>
           {analystNames.map((analyst, index) => (
@@ -134,6 +186,7 @@ function ProjectForm(props: ProjectFormProps) {
             <S.Error >O número mínimo de participantes é 1.</S.Error>
           )}
         </S.FieldContainer>
+
         <S.FieldContainer >
           <S.Label>Tarefas</S.Label>
           {tasksNames.map((task, index) => (
@@ -160,6 +213,29 @@ function ProjectForm(props: ProjectFormProps) {
             Adicionar uma nova tarefa
           </S.ButtonAnalyst>
         </S.FieldContainer>
+
+        <S.FieldContainer>
+          <S.Label>Escolha o tipo</S.Label>
+          <Checkbox checkboxType="type.video" checkboxName='Video' register={register} onChange={() => handleTypeCheckboxChange('video')} />
+          <Checkbox checkboxType="type.texto" checkboxName='Texto' register={register} onChange={() => handleTypeCheckboxChange('texto')} />
+          <Checkbox checkboxType="type.voz" checkboxName='Voz' register={register} onChange={() => handleTypeCheckboxChange('voz')} />
+          <Checkbox checkboxType="type.mousetrack" checkboxName='Mousetrack' register={register} onChange={() => handleTypeCheckboxChange('mousetrack')} />
+          {errors.type && Object.values(typeState).every((value) => !value) && (
+            <S.Error>{errors.type.root?.message}</S.Error>
+          )}
+        </S.FieldContainer>
+
+        <S.FieldContainer>
+          <S.Label>Sentimentos</S.Label>
+          <Checkbox checkboxType="feelings.outros" checkboxName="Outros" register={register} />
+          <Checkbox checkboxType="feelings.nojo" checkboxName="Nojo" register={register} />
+          <Checkbox checkboxType="feelings.alegria" checkboxName="Alegria" register={register} />
+          <Checkbox checkboxType="feelings.tristeza" checkboxName="Tristeza" register={register} />
+          <Checkbox checkboxType="feelings.medo" checkboxName="Medo" register={register} />
+          <Checkbox checkboxType="feelings.surpresa" checkboxName="Surpresa" register={register} />
+          <Checkbox checkboxType="feelings.raiva" checkboxName="Raiva" register={register} />
+        </S.FieldContainer>
+
         <S.ButtonSave type="submit">Salvar e Continuar</S.ButtonSave>
       </S.FormContainer>
     </ S.Form >

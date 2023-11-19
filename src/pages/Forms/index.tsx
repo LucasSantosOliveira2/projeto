@@ -3,8 +3,6 @@ import * as S from './styles';
 import { Sidebar } from '../../components/Sidebar';
 import ProjectForm from '../../components/ProjectForm';
 import { SecondForm } from '../../components/SecondForm';
-import { ThirdForm } from '../../components/ThirdForm';
-
 export const Forms = () => {
     const [currentForm, setCurrentForm] = useState('project');
 
@@ -16,9 +14,6 @@ export const Forms = () => {
         setCurrentForm('second');
     }
 
-    const switchToThirdForm = () => {
-        setCurrentForm('third');
-    };
 
     return (
         <S.Wrapper>
@@ -30,9 +25,7 @@ export const Forms = () => {
                 {currentForm === 'project' ? (
                     <ProjectForm switchToSecondForm={switchToSecondForm} />
                 ) : currentForm === 'second' ? (
-                    <SecondForm switchToProjectForm={switchToProjectForm} switchToThirdForm={switchToThirdForm} />
-                ) : currentForm === 'third' ? (
-                    <ThirdForm switchToSecondForm={switchToSecondForm} />
+                    <SecondForm switchToProjectForm={switchToProjectForm} />
                 ) : null}
             </S.ContentContainer>
         </S.Wrapper>
