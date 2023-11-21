@@ -125,7 +125,7 @@ function ProjectForm(props: ProjectFormProps) {
       <S.FormContainer>
         <S.Title>Informações do projeto</S.Title>
         <S.FieldContainer>
-          <S.Label>Nome do Projeto</S.Label>
+          <S.Label>Nome do Projeto<S.Required>*</S.Required></S.Label>
           <S.Input
             placeholder="Nome do Projeto"
             {...register('information.projectName')}
@@ -137,7 +137,7 @@ function ProjectForm(props: ProjectFormProps) {
         </S.FieldContainer>
 
         <S.FieldContainer>
-          <S.Label>Objetivo do projeto</S.Label>
+          <S.Label>Objetivo do projeto<S.Required>*</S.Required></S.Label>
           <S.TextArea
             placeholder="Descreva o objetivo do projeto"
             {...register('information.projectGoal')}
@@ -151,7 +151,7 @@ function ProjectForm(props: ProjectFormProps) {
           <S.Label>Analistas do projeto</S.Label>
           {analystNames.map((analyst, index) => (
             <S.FieldContainer key={index}>
-
+              <S.Label>Analista {index + 1}<S.Required>*</S.Required>:</S.Label>
               <S.AnalitcsContainer>
                 <S.Input
                   placeholder="Nome do Analista"
@@ -175,7 +175,7 @@ function ProjectForm(props: ProjectFormProps) {
         </S.FieldContainer>
         <S.FieldContainer>
           <S.InfoContainer>
-            <S.Label>Número de Participantes:</S.Label>
+            <S.Label>Número de Participantes<S.Required>*</S.Required>:</S.Label>
             <S.InputNumber
               type="number"
               {...register('information.numParticipants', { valueAsNumber: true })}
@@ -191,7 +191,7 @@ function ProjectForm(props: ProjectFormProps) {
           <S.Label>Tarefas</S.Label>
           {tasksNames.map((task, index) => (
             <S.FieldContainer key={index}>
-              <S.Label>Tarefa {index + 1}:</S.Label>
+              <S.Label>Tarefa {index + 1}<S.Required>*</S.Required>:</S.Label>
               <S.TaskContainer>
                 <S.Input
                   placeholder="Informe a tarefa"
@@ -215,7 +215,7 @@ function ProjectForm(props: ProjectFormProps) {
         </S.FieldContainer>
 
         <S.FieldContainer>
-          <S.Label>Escolha o tipo</S.Label>
+          <S.Label>Escolha o tipo<S.Required>*</S.Required></S.Label>
           <Checkbox checkboxType="type.video" checkboxName='Video' register={register} onChange={() => handleTypeCheckboxChange('video')} />
           <Checkbox checkboxType="type.texto" checkboxName='Texto' register={register} onChange={() => handleTypeCheckboxChange('texto')} />
           <Checkbox checkboxType="type.voz" checkboxName='Voz' register={register} onChange={() => handleTypeCheckboxChange('voz')} />
@@ -235,8 +235,12 @@ function ProjectForm(props: ProjectFormProps) {
           <Checkbox checkboxType="feelings.surpresa" checkboxName="Surpresa" register={register} />
           <Checkbox checkboxType="feelings.raiva" checkboxName="Raiva" register={register} />
         </S.FieldContainer>
-
-        <S.ButtonSave type="submit">Salvar e Continuar</S.ButtonSave>
+        <S.ButtonContainer>
+          <S.StyledLink to='/project'>
+            <S.ButtonSave >Voltar</S.ButtonSave>
+          </S.StyledLink>
+          <S.ButtonSave type="submit">Continuar</S.ButtonSave>
+        </S.ButtonContainer>
       </S.FormContainer>
     </ S.Form >
   );

@@ -96,7 +96,7 @@ export const ButtonAnalyst = styled.button`
 `
 export const ButtonSave = styled.button`
   width: 100%;
-  max-width: 360px;
+  max-width: 180px;
   height: 40px;
   border-radius: 16px;
   color: white;
@@ -113,6 +113,7 @@ export const Number = styled.h1`
 
 `
 export const StyledLink = styled(Link)`
+  width: 100%;
   text-decoration: none; 
   color: inherit;
 `
@@ -120,17 +121,18 @@ export const TaskContainer = styled(AnalitcsContainer)`
 `
 export const Error = styled.p`
  font-size: 0.875rem;
- color:white;
+ color: #7551FF;
  font-weight: 500;
 `
 export const InputNumber = styled.input`
+  max-width: 80px;
   width: 100%;
-  max-width: 60px;
   padding: 10px 10px;
   border-radius: 8px;
   height: 30px;
   outline:none;
   font-size: 0.875rem;
+  text-align: center;
   font-weight: 500;
   border: none;
   &::-webkit-inner-spin-button,
@@ -139,3 +141,17 @@ export const InputNumber = styled.input`
     appearance: none;
   }
   `
+export const Required = styled.span`
+  font-size: 1.2rem;
+  color: #7551FF;
+  font-weight: 500;
+
+  `
+export const ButtonContainer = styled.div`
+display: flex;
+align-items: center;
+gap: 10px;
+width: 100%;
+max-width: 480px;
+justify-content: space-evenly;
+`
