@@ -6,10 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "../CheckBox";
 
 type ProjectFormProps = {
-  switchToSecondForm: () => void,
+  switchToSecondForm: (numParticipants: number, tasksNames: string[]) => void;
+  onSave: (data: FormProps) => void;
 }
 
-type FormProps = z.infer<typeof SchemaForm>
+
+export type FormProps = z.infer<typeof SchemaForm>
 
 const SchemaForm = z.object({
   information: z.object({
@@ -43,7 +45,7 @@ const SchemaForm = z.object({
 
 
 function ProjectForm(props: ProjectFormProps) {
-  const { handleSubmit, register, formState: { errors } } = useForm<FormProps>({
+  const { handleSubmit, register, formState: { errors }, trigger, getValues } = useForm<FormProps>({
     criteriaMode: 'all',
     mode: 'all',
     resolver: zodResolver(SchemaForm),
@@ -76,9 +78,11 @@ function ProjectForm(props: ProjectFormProps) {
 
   const [analystNames, setAnalystNames] = useState(['']);
   const [tasksNames, setTasksNames] = useState(['']);
+  const [numTasks, setNumTasks] = useState(0);
 
   const addAnalyst = () => {
     setAnalystNames([...analystNames, '']);
+    setNumTasks(numTasks + 1);
   }
 
   const removeAnalyst = (index: number) => {
@@ -103,7 +107,8 @@ function ProjectForm(props: ProjectFormProps) {
 
   const handleFormSubmit = (data: FormProps) => {
     console.log(data);
-    props.switchToSecondForm();
+    props.switchToSecondForm(data.information.numParticipants, Object.values(data.information.tasksName));
+    props.onSave(data);
   }
 
   const [typeState, setTypeState] = useState({
@@ -120,8 +125,32 @@ function ProjectForm(props: ProjectFormProps) {
     }));
   };
 
+  const handleValidationAndSave = () => {
+    // Realiza a validação para todos os campos do formulário
+    trigger().then((isValid) => {
+      // Se a validação for bem-sucedida, continua com a lógica de salvar os dados
+      if (isValid) {
+        // Obtém os dados do formulário
+        const formData = getValues();
+
+        console.log(formData);
+
+        // Chama a função onSave para salvar os dados
+        props.onSave(formData);
+
+        // Navega para a próxima etapa
+        props.switchToSecondForm(
+          formData.information.numParticipants,
+          Object.values(formData.information.tasksName)
+        );
+      }
+    });
+  };
+
+
+
   return (
-    <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
+    <S.Form >
       <S.FormContainer>
         <S.Title>Informações do projeto</S.Title>
         <S.FieldContainer>
@@ -239,7 +268,7 @@ function ProjectForm(props: ProjectFormProps) {
           <S.StyledLink to='/project'>
             <S.ButtonSave >Voltar</S.ButtonSave>
           </S.StyledLink>
-          <S.ButtonSave type="submit">Continuar</S.ButtonSave>
+          <S.ButtonSave type="button" onClick={() => handleValidationAndSave()}>Continuar</S.ButtonSave>
         </S.ButtonContainer>
       </S.FormContainer>
     </ S.Form >

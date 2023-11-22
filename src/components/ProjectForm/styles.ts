@@ -121,7 +121,7 @@ export const TaskContainer = styled(AnalitcsContainer)`
 `
 export const Error = styled.p`
  font-size: 0.875rem;
- color: #7551FF;
+ color: white;
  font-weight: 500;
 `
 export const InputNumber = styled.input`
