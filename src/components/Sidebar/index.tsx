@@ -73,22 +73,7 @@ export const Sidebar = () => {
                     onClick={() => handleItemClick('dashboard')}
                 />
             </S.StyledLink>
-            <S.StyledLink to="/analysis">
-                <SidebarItem
-                    icon={<IoMdAnalytics />}
-                    name="Análise"
-                    isActive={activeItem === 'analysis'}
-                    onClick={() => handleItemClick('analysis')}
-                />
-            </S.StyledLink>
-            <S.StyledLink to="/statistics">
-                <SidebarItem
-                    icon={<BiSolidBarChartSquare />}
-                    name="Estatísticas"
-                    isActive={activeItem === 'statistics'}
-                    onClick={() => handleItemClick('statistics')}
-                />
-            </S.StyledLink>
+
             <S.StyledLink to="/profile">
                 <SidebarItem
                     icon={<BiSolidUser />}

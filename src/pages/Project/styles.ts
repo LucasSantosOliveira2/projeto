@@ -24,6 +24,7 @@ export const ContentContainer = styled.div`
     margin-top: 125px;
   }
 `
+
 export const ContainerItems = styled.div`
   width: 100%;
   display: flex;
