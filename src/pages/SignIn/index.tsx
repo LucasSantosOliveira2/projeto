@@ -1,14 +1,32 @@
 import * as S from "./styles";
 import Arrow from "../../components/Images/Arrow";
 import Google from "../../components/Images/GoogleIcon";
-import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 export const SignIn = () => {
 
+    const navigate = useNavigate();
 
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            console.log(tokenResponse);
+
+            try {
+                const userInfo = await axios.get(
+                    'https://www.googleapis.com/oauth2/v3/userinfo',
+                    { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
+                );
+
+                console.log(userInfo.data);
+                navigate('/dashboard');
+            } catch (error) {
+                console.error('Erro ao obter informações do usuário:', error);
+            }
+        },
+        onError: (errorResponse) => console.log(errorResponse),
     });
 
     return (
@@ -24,25 +42,9 @@ export const SignIn = () => {
                     <S.Title>Entrar</S.Title>
                     <S.Text>Entre com sua conta Google</S.Text>
                 </S.Headline>
-                <S.StyledLink to="/project">
-                    <S.ButtonGoogle>
-                        <Google />Entrar com Google
-                    </S.ButtonGoogle>
-                </S.StyledLink>
-                <GoogleLogin
-                    onSuccess={(credentialResponse) => {
-                        if (credentialResponse && credentialResponse.credential) {
-                            const decod = jwtDecode(credentialResponse.credential as string);
-                            console.log(decod);
-                        } else {
-                            console.error('Login Successful, but credential is undefined or null');
-                        }
-                    }}
-                    onError={() => {
-                        console.log('Login Failed');
-                    }}
-                />
-
+                <S.ButtonGoogle onClick={() => googleLogin()}>
+                    <Google />Entrar com Google
+                </S.ButtonGoogle>
             </S.Container >
         </S.Wrapper >
     )
