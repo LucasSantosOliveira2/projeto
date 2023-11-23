@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
 import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare, BiSolidFolder, BiSolidExit } from "react-icons/bi";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMdAnalytics } from "react-icons/io";
-
+import { googleLogout } from '@react-oauth/google';
 
 IoMdAnalytics
 export const Sidebar = () => {
 
     const location = useLocation();
+    const navigate = useNavigate();
+
     const [activeItem, setActiveItem] = useState('project');
 
     useEffect(() => {
@@ -36,6 +38,15 @@ export const Sidebar = () => {
 
     const handleItemClick = (itemName: string) => {
         setActiveItem(itemName);
+    }
+
+    const handleLogout = async () => {
+        try {
+            await googleLogout();
+            navigate('/');
+        } catch (error) {
+            console.error('Erro durante o logout:', error);
+        }
     };
 
     return (
@@ -86,12 +97,11 @@ export const Sidebar = () => {
                     onClick={() => handleItemClick('profile')}
                 />
             </S.StyledLink>
-            <S.StyledLink to="/">
-                <SidebarItem
-                    icon={<BiSolidExit />}
-                    name="Sair"
-                />
-            </S.StyledLink>
+            <SidebarItem
+                icon={<BiSolidExit />}
+                name="Sair"
+                onClick={handleLogout}
+            />
         </S.Wrapper>
     );
 };

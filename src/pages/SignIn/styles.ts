@@ -82,7 +82,6 @@ export const ButtonGoogle = styled.button`
         &:hover {
         background: #2c3a6a; 
     }
-    
 `
 export const StyledLink = styled(Link)`
   text-decoration: none; 

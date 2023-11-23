@@ -2,6 +2,7 @@ import * as S from "./styles";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -24,7 +25,10 @@ export const SecondForm = (props: SecondFormProps) => {
      console.log('Num Participants:', props.numParticipants);
      console.log('Tasks Names:', props.tasksNames);
      console.log('Num Tasks:', props.tasksNames.length)
+
  */
+    const [submittedData, setSubmittedData] = useState<SecondForm[]>([]);
+
     const { handleSubmit, register, formState: { errors } } = useForm<SecondForm>({
         criteriaMode: 'all',
         mode: 'all',
@@ -34,11 +38,19 @@ export const SecondForm = (props: SecondFormProps) => {
                 participantAnalysis: {},
             }
         }
-    })
-
+    });
     const handleFormSubmit = (data: SecondForm) => {
-        console.log(data);
-    }
+        setSubmittedData((prevData) => {
+            const newData = [...prevData];
+            newData[props.currentTaskIndex] = data;
+            console.log(newData);
+            console.log(props.currentTaskIndex);
+            return newData;
+        });
+    };
+
+    console.log(submittedData[props.currentTaskIndex]);
+
 
     const switchToNextForm = () => {
         props.switchToNextForm();
@@ -65,7 +77,7 @@ export const SecondForm = (props: SecondFormProps) => {
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>
                     {props.currentTaskIndex < props.tasksNames.length - 1 ? (
-                        <S.ButtonSave type="button" onClick={switchToNextForm}>
+                        <S.ButtonSave type="submit" onClick={switchToNextForm}>
                             Continuar
                         </S.ButtonSave>
                     ) : (

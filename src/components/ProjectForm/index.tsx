@@ -125,6 +125,7 @@ function ProjectForm(props: ProjectFormProps) {
     }));
   };
 
+
   const handleValidationAndSave = () => {
     // Realiza a validação para todos os campos do formulário
     trigger().then((isValid) => {
