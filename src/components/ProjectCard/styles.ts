@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    max-width: 450px;
-    width: 100%;
+    max-width: 650px;
+    width: 90%;
     height: 108px;
     display: flex;
     padding-top: 23px;
@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
     border-radius: 20px;
     flex-direction: column;
     background-color: #1B254B;
+
 `
 export const InfoTitle = styled.h1`
    color: white;

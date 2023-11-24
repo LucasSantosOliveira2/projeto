@@ -4,8 +4,10 @@ export const Wrapper = styled.section`
   display: flex;
   background-color: #0B1437;
   width: 100%;
-  height: 100vh;
-`;
+  min-height: 100vh;
+  height: 100%;
+  margin-bottom: 20px;
+`
 
 export const SidebarContainer = styled.div`
   flex: 1;
@@ -24,12 +26,20 @@ export const ContentContainer = styled.div`
     margin-top: 125px;
   }
 `
-
-export const ContainerItems = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0 10px;
+export const Title = styled.h1`
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+    color : white;
+`
+export const InfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: #111C44;
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    gap: 20px;
+    align-items: center;
 `
