@@ -3,8 +3,8 @@ import { ChangeEvent } from 'react';
 
 type CheckboxProps = {
     checkboxName: string,
-    checkboxType: string,
-    register: any,
+    checkboxType?: string,
+    register?: any,
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 
 }
@@ -14,6 +14,7 @@ const optionsDisabled = ['Voz', 'Mousetrack', 'Video'];
 
 export const Checkbox = ({ checkboxType, checkboxName, register, onChange }: CheckboxProps) => {
     const isOptionDisabled = optionsDisabled.includes(checkboxName);
+    //const inputId = `${checkboxType}-${checkboxName}`;
 
 
     return (

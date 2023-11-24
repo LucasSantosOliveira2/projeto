@@ -155,3 +155,9 @@ width: 100%;
 max-width: 480px;
 justify-content: space-evenly;
 `
+export const CheckboxContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+`

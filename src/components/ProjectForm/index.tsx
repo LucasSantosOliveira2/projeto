@@ -26,6 +26,8 @@ const SchemaForm = z.object({
     texto: z.boolean(),
     voz: z.boolean(),
     mousetrack: z.boolean(),
+    ironia: z.boolean(),
+    polaridade: z.boolean(),
   }).refine(data => {
     const { video, texto, voz, mousetrack } = data;
     return video || texto || voz || mousetrack;
@@ -62,6 +64,8 @@ function ProjectForm(props: ProjectFormProps) {
         texto: false,
         voz: false,
         mousetrack: false,
+        ironia: false,
+        polaridade: false,
       },
       feelings: {
         outros: false,
@@ -79,6 +83,7 @@ function ProjectForm(props: ProjectFormProps) {
   const [analystNames, setAnalystNames] = useState(['']);
   const [tasksNames, setTasksNames] = useState(['']);
   const [numTasks, setNumTasks] = useState(0);
+
 
   const addAnalyst = () => {
     setAnalystNames([...analystNames, '']);
@@ -123,30 +128,27 @@ function ProjectForm(props: ProjectFormProps) {
       ...prevState,
       [type]: !prevState[type],
     }));
+
+
   };
 
 
   const handleValidationAndSave = () => {
-    // Realiza a validação para todos os campos do formulário
     trigger().then((isValid) => {
-      // Se a validação for bem-sucedida, continua com a lógica de salvar os dados
       if (isValid) {
-        // Obtém os dados do formulário
         const formData = getValues();
 
         console.log(formData);
 
-        // Chama a função onSave para salvar os dados
         props.onSave(formData);
 
-        // Navega para a próxima etapa
         props.switchToSecondForm(
           formData.information.numParticipants,
           Object.values(formData.information.tasksName)
         );
       }
     });
-  };
+  }
 
 
 
@@ -245,9 +247,18 @@ function ProjectForm(props: ProjectFormProps) {
         </S.FieldContainer>
 
         <S.FieldContainer>
-          <S.Label>Escolha o tipo<S.Required>*</S.Required></S.Label>
+          <S.Label>Escolha o tipo de análise<S.Required>*</S.Required></S.Label>
           <Checkbox checkboxType="type.video" checkboxName='Video' register={register} onChange={() => handleTypeCheckboxChange('video')} />
-          <Checkbox checkboxType="type.texto" checkboxName='Texto' register={register} onChange={() => handleTypeCheckboxChange('texto')} />
+          <S.CheckboxContainer>
+            <Checkbox checkboxType="type.texto" checkboxName='Texto' register={register} onChange={() => handleTypeCheckboxChange('texto')} />
+            {typeState.texto && (
+              <S.CheckboxContainer>
+                <Checkbox checkboxName="Ironia" checkboxType="type.ironia" register={register} />
+                <Checkbox checkboxName="Polaridade" checkboxType="type.polaridade" register={register} />
+              </S.CheckboxContainer>
+            )}
+
+          </S.CheckboxContainer>
           <Checkbox checkboxType="type.voz" checkboxName='Voz' register={register} onChange={() => handleTypeCheckboxChange('voz')} />
           <Checkbox checkboxType="type.mousetrack" checkboxName='Mousetrack' register={register} onChange={() => handleTypeCheckboxChange('mousetrack')} />
           {errors.type && Object.values(typeState).every((value) => !value) && (
