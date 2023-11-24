@@ -3,11 +3,13 @@ import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { ContentProfile } from "../../components/ContentProfile";
 import { ProjectCard } from "../../components/ProjectCard";
+import { useUser } from "../../components/UserContext";
 import BackgroundImage from "../../assets/Images/BackgroundImage.png"
-import Malcom from "../../assets/Images/malcom.jpeg"
 
 
 export const Profile = () => {
+    const { userData } = useUser();
+
     return (
         <S.Wrapper>
             <S.SidebarContainer>
@@ -24,16 +26,17 @@ export const Profile = () => {
                     <S.ProfileContent>
                         <S.ProfileImage
                             style={{
-                                backgroundImage: `url(${Malcom})`,
+                                backgroundImage: `url(${userData?.picture})`,
                             }}
                         />
-                        <S.ProfileName>Malcom</S.ProfileName>
+
+                        <S.ProfileName>{userData && userData.name}</S.ProfileName>
                     </S.ProfileContent>
                 </S.MediumProfile>
                 <S.InfoContainer>
                     <S.Title>Informações Gerais</S.Title>
                     <S.InfoContent>
-                        <ContentProfile type="E-mail" name="exemplo@exemplo.com" />
+                        <ContentProfile type="E-mail" name={userData?.email} />
                         <ContentProfile type="Educação" />
                         <ContentProfile type="Departamento" />
                         <ContentProfile type="Organização" />

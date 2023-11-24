@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
 import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare, BiSolidFolder, BiSolidExit } from "react-icons/bi";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useUser } from '../UserContext';
 import { IoMdAnalytics } from "react-icons/io";
 import { googleLogout } from '@react-oauth/google';
 
@@ -11,6 +12,8 @@ export const Sidebar = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const { userData } = useUser();
+
 
     const [activeItem, setActiveItem] = useState('project');
 
@@ -51,7 +54,7 @@ export const Sidebar = () => {
 
     return (
         <S.Wrapper>
-            <S.Title>Olá, Lucas</S.Title>
+            <S.Title>Olá, {userData?.given_name}</S.Title>
             <S.Separator />
             <S.StyledLink to="/forms">
                 <S.ButtonCreateProject >Criar Projeto</S.ButtonCreateProject>

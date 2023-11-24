@@ -44,7 +44,7 @@ export const BackgroundImage = styled.div`
     height: 131px;
     border-radius: 16px;
     margin-top: 30px;
-    margin-bottom: 110px;
+    margin-bottom: 120px;
     position: relative;
 `
 export const ProfileContent = styled.div`
@@ -53,7 +53,7 @@ export const ProfileContent = styled.div`
     align-items: center;
     gap: 15px;
     position: absolute;
-    transform: translateY(75%);
+    transform: translateY(85%);
 `
 export const ProfileImage = styled.div`
     background-size: cover;

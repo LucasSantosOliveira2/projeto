@@ -4,11 +4,12 @@ import Google from "../../components/Images/GoogleIcon";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+import { useUser } from "../../components/UserContext";
 
 export const SignIn = () => {
-
     const navigate = useNavigate();
+    const { setUser } = useUser();
+
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -21,7 +22,8 @@ export const SignIn = () => {
                 );
 
                 console.log(userInfo.data);
-                navigate('/dashboard');
+                setUser(userInfo.data);
+                navigate('/profile');
             } catch (error) {
                 console.error('Erro ao obter informações do usuário:', error);
             }
