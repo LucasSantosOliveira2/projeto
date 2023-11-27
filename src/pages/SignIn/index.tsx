@@ -21,9 +21,12 @@ export const SignIn = () => {
 
                 console.log(userInfo);
 
-                setUser(userInfo);
-
+                // Salvar informações relevantes no localStorage
                 localStorage.setItem('token', tokenResponse.access_token);
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+                // Configurar o estado do usuário
+                setUser(userInfo);
 
                 navigate('/profile');
             } catch (error) {

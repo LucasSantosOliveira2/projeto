@@ -1,14 +1,25 @@
+import React, { useEffect } from "react";
 import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { ContentProfile } from "../../components/ContentProfile";
 import { ProjectCard } from "../../components/ProjectCard";
 import { useUser } from "../../components/UserContext";
-import BackgroundImage from "../../assets/Images/BackgroundImage.png"
-
+import BackgroundImage from "../../assets/Images/BackgroundImage.png";
 
 export const Profile = () => {
-    const { userData } = useUser();
+  const { userData, setUser } = useUser();
+
+  useEffect(() => {
+    // Verificar se existem dados de usuário no localStorage
+    const storedUserInfo = localStorage.getItem("userInfo");
+
+    if (storedUserInfo) {
+      // Se existirem, configurar o estado do usuário com base nos dados armazenados
+      const userInfo = JSON.parse(storedUserInfo);
+      setUser(userInfo);
+    }
+  }, [setUser]);
 
     return (
         <S.Wrapper>
