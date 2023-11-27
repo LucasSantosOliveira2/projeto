@@ -6,6 +6,7 @@ export const Wrapper = styled.section`
   width: 100%;
   min-height: 100vh;
   height: 100%;
+  margin-bottom: 20px;
 `
 export const SidebarContainer = styled.div`
   flex: 1;
@@ -33,9 +34,7 @@ export const MediumProfile = styled.div`
     width: 80%;
     background-color: #111C44;
     border-radius: 16px;
-    margin-top: 20px;
-    
-    overflow: hidden;
+    margin-top: 20px;    
 `
 export const BackgroundImage = styled.div`
     background-size: cover;
@@ -70,10 +69,13 @@ export const ProfileName = styled.h1`
     color: white;
 `
 export const Title = styled.h1`
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 2rem;
     color : white;
+    @media screen and (min-width: 281px) {
+      font-size: 1.5rem;
+    }
 `
 
 export const InfoContent = styled.div`

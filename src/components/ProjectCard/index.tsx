@@ -9,7 +9,7 @@ export const ProjectCard = ({ title, number }: ProjectCardProps) => {
     return (
         <S.Wrapper>
             <S.InfoTitle>{title}</S.InfoTitle>
-            <S.InfoNumber>Project #{number}</S.InfoNumber>
+            <S.InfoNumber>Projeto #{number}</S.InfoNumber>
         </S.Wrapper >
     )
 }

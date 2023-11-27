@@ -3,7 +3,6 @@ import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { ContentProfile } from "../../components/ContentProfile";
-import { ProjectCard } from "../../components/ProjectCard";
 import { useUser } from "../../components/UserContext";
 import BackgroundImage from "../../assets/Images/BackgroundImage.png";
 
@@ -53,13 +52,7 @@ export const Profile = () => {
                         <ContentProfile type="Organização" />
                     </S.InfoContent>
                 </S.InfoContainer>
-                <S.InfoContainer>
-                    <S.Title>Projetos</S.Title>
-                    <ProjectCard title="Análise comentários do twitter" number="1" />
-                    <ProjectCard title="Análise comentários do twitter" number="1" />
-                    <ProjectCard title="Análise comentários do twitter" number="1" />
-                    <ProjectCard title="Análise comentários do twitter" number="1" />
-                </S.InfoContainer>
+
             </S.ContentContainer>
         </S.Wrapper>
     )
