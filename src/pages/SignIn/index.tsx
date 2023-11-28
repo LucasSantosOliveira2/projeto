@@ -4,6 +4,7 @@ import Google from "../../components/Images/GoogleIcon";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../../components/UserContext";
+import axios from 'axios';
 
 export const SignIn = () => {
     const navigate = useNavigate();
@@ -14,10 +15,11 @@ export const SignIn = () => {
             console.log(tokenResponse);
 
             try {
-                const userInfo = await fetch(
-                    'https://www.googleapis.com/oauth2/v3/userinfo',
-                    { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
-                ).then(response => response.json());
+                const userInfoResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                });
+
+                const userInfo = userInfoResponse.data;
 
                 console.log(userInfo);
 

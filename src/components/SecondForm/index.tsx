@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -21,13 +21,9 @@ const SchemaForm = z.object({
 });
 
 export const SecondForm = (props: SecondFormProps) => {
-    /* console.log('Dados recebidos em SecondForm:');
-     console.log('Num Participants:', props.numParticipants);
-     console.log('Tasks Names:', props.tasksNames);
-     console.log('Num Tasks:', props.tasksNames.length)
+    const [submittedData, setSubmittedData] = useState<Array<SecondForm>>([]);
+    const submittedDataRef = useRef<Array<SecondForm>>(submittedData);
 
- */
-    const [submittedData, setSubmittedData] = useState<SecondForm[]>([]);
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondForm>({
         criteriaMode: 'all',
@@ -39,17 +35,19 @@ export const SecondForm = (props: SecondFormProps) => {
             }
         }
     });
+
     const handleFormSubmit = (data: SecondForm) => {
         setSubmittedData((prevData) => {
             const newData = [...prevData];
             newData[props.currentTaskIndex] = data;
-            console.log(newData);
-            console.log(props.currentTaskIndex);
+            submittedDataRef.current = newData; // Atualiza o ref em tempo real
             return newData;
         });
-    };
 
-    console.log(submittedData[props.currentTaskIndex]);
+    };
+    //console.log("teste", newData[props.currentTaskIndex]); // Use aqui
+    //console.log(newData);
+    //console.log(props.currentTaskIndex);
 
 
     const switchToNextForm = () => {

@@ -29,6 +29,7 @@ export const Forms = () => {
     };
 
     //console.log('Dados salvos:', projectFormData);
+    //console.log("currentTaskIndex em Forms.tsx:", currentTaskIndex);
 
 
     return (
