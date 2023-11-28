@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect, useRef } from "react";
@@ -10,48 +10,69 @@ type SecondFormProps = {
     tasksNames: string[];
     currentTaskIndex: number;
     switchToNextForm: () => void;
-}
-
-type SecondForm = z.infer<typeof SchemaForm>
+    finishForm: () => void; // Função para finalizar o formulário
+};
 
 const SchemaForm = z.object({
     description: z.object({
         participantAnalysis: z.record(z.string().min(1, 'Informe sua opinião')),
-    })
+    }),
 });
 
+type SecondFormValues = z.infer<typeof SchemaForm>;
+
 export const SecondForm = (props: SecondFormProps) => {
-    const [submittedData, setSubmittedData] = useState<Array<SecondForm>>([]);
-    const submittedDataRef = useRef<Array<SecondForm>>(submittedData);
+    const [submittedData, setSubmittedData] = useState<Array<SecondFormValues>>(
+        Array.from({ length: props.tasksNames.length }, () => ({ description: { participantAnalysis: {} } }))
+    );
+    const submittedDataRef = useRef<Array<SecondFormValues>>(submittedData);
 
-
-    const { handleSubmit, register, formState: { errors } } = useForm<SecondForm>({
+    const { handleSubmit, register, formState: { errors }, reset } = useForm<SecondFormValues>({
         criteriaMode: 'all',
         mode: 'all',
         resolver: zodResolver(SchemaForm),
         defaultValues: {
             description: {
                 participantAnalysis: {},
-            }
-        }
+            },
+        },
     });
 
-    const handleFormSubmit = (data: SecondForm) => {
+    useEffect(() => {
+        const latestData = submittedDataRef.current;
+        console.log("submittedDataRef.current:", latestData);
+        // Faça outras ações conforme necessário com os dados atualizados
+    }, [submittedDataRef.current]);
+
+    const handleFormSubmit: SubmitHandler<SecondFormValues> = async (data) => {
+        console.log("Submitted Data:", data);
+
         setSubmittedData((prevData) => {
             const newData = [...prevData];
             newData[props.currentTaskIndex] = data;
             submittedDataRef.current = newData; // Atualiza o ref em tempo real
+            console.log("Submitted Data:", newData);
+            console.log("Submitted :", submittedDataRef.current);
             return newData;
         });
 
-    };
-    //console.log("teste", newData[props.currentTaskIndex]); // Use aqui
-    //console.log(newData);
-    //console.log(props.currentTaskIndex);
+        try {
+            // Simule uma operação assíncrona, como uma chamada de API
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
+            // Limpe o formulário após o envio bem-sucedido.
+            reset();
 
-    const switchToNextForm = () => {
-        props.switchToNextForm();
+            if (props.currentTaskIndex === props.tasksNames.length - 1) {
+                console.log('finish');
+            } else {
+                // Caso contrário, prossiga para o próximo formulário
+                props.switchToNextForm();
+            }
+        } catch (error) {
+            console.error("Erro ao enviar o formulário:", error);
+            // Lide com erros de envio, se necessário.
+        }
     };
 
     return (
@@ -74,18 +95,11 @@ export const SecondForm = (props: SecondFormProps) => {
                 ))}
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>
-                    {props.currentTaskIndex < props.tasksNames.length - 1 ? (
-                        <S.ButtonSave type="submit" onClick={switchToNextForm}>
-                            Continuar
-                        </S.ButtonSave>
-                    ) : (
-                        <S.ButtonSave type="submit">
-                            Finalizar
-                        </S.ButtonSave>
-                    )}
+                    <S.ButtonSave type="submit">
+                        {props.currentTaskIndex === props.tasksNames.length - 1 ? "Finalizar" : "Continuar"}
+                    </S.ButtonSave>
                 </S.ButtonContainer>
-
             </S.FormContainer>
-        </S.Form >
+        </S.Form>
     );
 };
