@@ -25,7 +25,8 @@ export const SignIn = () => {
 
                 setUser(userInfo);
 
-                localStorage.setItem('token', tokenResponse.access_token);
+                // Ajuste na chave utilizada para armazenar os dados do usuário
+                window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
                 navigate('/profile');
             } catch (error) {
@@ -34,6 +35,7 @@ export const SignIn = () => {
         },
         onError: (errorResponse) => console.log(errorResponse),
     });
+
 
     return (
         <S.Wrapper>
