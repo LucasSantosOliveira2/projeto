@@ -25,7 +25,6 @@ export const SignIn = () => {
 
                 setUser(userInfo);
 
-                // Ajuste na chave utilizada para armazenar os dados do usuário
                 window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
                 navigate('/profile');

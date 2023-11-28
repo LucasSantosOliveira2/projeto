@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
@@ -8,19 +8,17 @@ import BackgroundImage from "../../assets/Images/BackgroundImage.png";
 
 export const Profile = () => {
     const { userData, setUser } = useUser();
-  
+
     useEffect(() => {
-      // Verificar se existem dados de usuário no localStorage
-      const storedUserInfo = window.localStorage.getItem("userInfo");
-      console.log(storedUserInfo);
-  
-      if (storedUserInfo) {
-        // Se existirem, configurar o estado do usuário com base nos dados armazenados
-        const userInfo = JSON.parse(storedUserInfo);
-        setUser(userInfo);
-      }
-    }, [setUser]);
-  
+
+        const storedUserInfo = window.localStorage.getItem("userInfo");
+        console.log(storedUserInfo);
+
+        if (storedUserInfo) {
+            const userInfo = JSON.parse(storedUserInfo);
+            setUser(userInfo);
+        }
+    }, []);
 
     return (
         <S.Wrapper>
