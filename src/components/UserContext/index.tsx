@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-// UserContext.js
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type UserData = {

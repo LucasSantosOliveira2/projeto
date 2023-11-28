@@ -6,19 +6,28 @@ import { ContentProfile } from "../../components/ContentProfile";
 import { useUser } from "../../components/UserContext";
 import BackgroundImage from "../../assets/Images/BackgroundImage.png";
 
+
+
 export const Profile = () => {
     const { userData, setUser } = useUser();
 
     useEffect(() => {
-
         const storedUserInfo = window.localStorage.getItem("userInfo");
-        console.log(storedUserInfo);
+        //console.log(storedUserInfo);
+        console.log('ok')
 
         if (storedUserInfo) {
             const userInfo = JSON.parse(storedUserInfo);
-            setUser(userInfo);
+            setUser((prevUser) => {
+                if (JSON.stringify(prevUser) !== JSON.stringify(userInfo)) {
+                    console.log("setUser foi chamado");
+                    return userInfo;
+                }
+                return prevUser;
+            });
         }
-    }, []);
+    }, [setUser]);
+
 
     return (
         <S.Wrapper>
