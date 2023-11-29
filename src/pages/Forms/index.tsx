@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import * as S from './styles';
 import { Sidebar } from '../../components/Sidebar';
 import ProjectForm, { FormProps } from '../../components/ProjectForm';
-import { SecondForm, SecondFormValues } from '../../components/SecondForm';
+import { SecondForm } from '../../components/SecondForm';
 
 type ProjectFormDataState = FormProps | null;
 
@@ -14,9 +15,6 @@ export const Forms = () => {
     const [numTasks, setNumTasks] = useState(0);
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [projectFormData, setProjectFormData] = useState<ProjectFormDataState>(null);
-    const [allFormData, setAllFormData] = useState<Array<SecondFormValues>>([]);
-
-
 
     const switchToProjectForm = () => {
         setCurrentForm('project');
@@ -30,7 +28,7 @@ export const Forms = () => {
         setCurrentTaskIndex(0);
     };
 
-    //console.log('Dados salvos:', projectFormData);
+    console.log('Dados salvos:', projectFormData);
     //console.log("currentTaskIndex em Forms.tsx:", currentTaskIndex);
 
 

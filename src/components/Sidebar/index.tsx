@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
-import { BiSolidDashboard, BiSolidUser, BiSolidBarChartSquare, BiSolidFolder, BiSolidExit } from "react-icons/bi";
+import { BiSolidDashboard, BiSolidUser, BiSolidFolder, BiSolidExit } from "react-icons/bi";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import { IoMdAnalytics } from "react-icons/io";

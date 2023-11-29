@@ -14,8 +14,6 @@ const optionsDisabled = ['Voz', 'Mousetrack', 'Video'];
 
 export const Checkbox = ({ checkboxType, checkboxName, register, onChange }: CheckboxProps) => {
     const isOptionDisabled = optionsDisabled.includes(checkboxName);
-    //const inputId = `${checkboxType}-${checkboxName}`;
-
 
     return (
         <S.Label>
