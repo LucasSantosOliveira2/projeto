@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from './styles';
 import { Sidebar } from '../../components/Sidebar';
 import ProjectForm, { FormProps } from '../../components/ProjectForm';
-import { SecondForm } from '../../components/SecondForm';
+import { SecondForm, SecondFormValues } from '../../components/SecondForm';
 
 type ProjectFormDataState = FormProps | null;
 
@@ -14,6 +14,8 @@ export const Forms = () => {
     const [numTasks, setNumTasks] = useState(0);
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [projectFormData, setProjectFormData] = useState<ProjectFormDataState>(null);
+    const [allFormData, setAllFormData] = useState<Array<SecondFormValues>>([]);
+
 
 
     const switchToProjectForm = () => {
@@ -30,6 +32,7 @@ export const Forms = () => {
 
     //console.log('Dados salvos:', projectFormData);
     //console.log("currentTaskIndex em Forms.tsx:", currentTaskIndex);
+
 
 
     return (

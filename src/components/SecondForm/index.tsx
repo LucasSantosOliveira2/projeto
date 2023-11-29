@@ -1,8 +1,7 @@
 import * as S from "./styles";
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useEffect, useRef } from "react";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -10,7 +9,6 @@ type SecondFormProps = {
     tasksNames: string[];
     currentTaskIndex: number;
     switchToNextForm: () => void;
-    finishForm: () => void; // Função para finalizar o formulário
 };
 
 const SchemaForm = z.object({
@@ -19,15 +17,14 @@ const SchemaForm = z.object({
     }),
 });
 
-type SecondFormValues = z.infer<typeof SchemaForm>;
+export type SecondFormValues = z.infer<typeof SchemaForm>;
 
 export const SecondForm = (props: SecondFormProps) => {
-    const [submittedData, setSubmittedData] = useState<Array<SecondFormValues>>(
-        Array.from({ length: props.tasksNames.length }, () => ({ description: { participantAnalysis: {} } }))
-    );
-    const submittedDataRef = useRef<Array<SecondFormValues>>(submittedData);
+    /* const [submittedData, setSubmittedData] = useState<Array<SecondFormValues>>(
+         Array.from({ length: props.tasksNames.length }, () => ({ description: { participantAnalysis: {} } }))
+     );*/
 
-    const { handleSubmit, register, formState: { errors }, reset } = useForm<SecondFormValues>({
+    const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
         criteriaMode: 'all',
         mode: 'all',
         resolver: zodResolver(SchemaForm),
@@ -38,41 +35,10 @@ export const SecondForm = (props: SecondFormProps) => {
         },
     });
 
-    useEffect(() => {
-        const latestData = submittedDataRef.current;
-        console.log("submittedDataRef.current:", latestData);
-        // Faça outras ações conforme necessário com os dados atualizados
-    }, [submittedDataRef.current]);
-
-    const handleFormSubmit: SubmitHandler<SecondFormValues> = async (data) => {
+    const handleFormSubmit = async (data: SecondFormValues) => {
         console.log("Submitted Data:", data);
 
-        setSubmittedData((prevData) => {
-            const newData = [...prevData];
-            newData[props.currentTaskIndex] = data;
-            submittedDataRef.current = newData; // Atualiza o ref em tempo real
-            console.log("Submitted Data:", newData);
-            console.log("Submitted :", submittedDataRef.current);
-            return newData;
-        });
 
-        try {
-            // Simule uma operação assíncrona, como uma chamada de API
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            // Limpe o formulário após o envio bem-sucedido.
-            reset();
-
-            if (props.currentTaskIndex === props.tasksNames.length - 1) {
-                console.log('finish');
-            } else {
-                // Caso contrário, prossiga para o próximo formulário
-                props.switchToNextForm();
-            }
-        } catch (error) {
-            console.error("Erro ao enviar o formulário:", error);
-            // Lide com erros de envio, se necessário.
-        }
     };
 
     return (
