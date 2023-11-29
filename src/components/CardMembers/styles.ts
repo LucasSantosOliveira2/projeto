@@ -21,6 +21,7 @@ export const Info = styled.div`
     flex-direction: column;
     width: 280px;
     height: 140px;
+    gap:5px;
     border-radius: 0px 0px 20px 20px;
     background: #2B2B2B;
     padding: 5px 20px 0px 20px;

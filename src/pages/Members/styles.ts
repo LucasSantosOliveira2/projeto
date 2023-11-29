@@ -38,6 +38,7 @@ export const ContainerCard = styled.div`
     grid-template-columns: repeat(1, 1fr);
     align-items: center;
     grid-gap: 20px;
+    margin-bottom: 50px;
     @media screen and (min-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
         width: 620px;

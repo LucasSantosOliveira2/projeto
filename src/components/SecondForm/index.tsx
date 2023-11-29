@@ -2,6 +2,7 @@ import * as S from "./styles";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -23,6 +24,7 @@ const dataArray: SecondFormValues[] = [];
 
 
 export const SecondForm = (props: SecondFormProps) => {
+    const navigate = useNavigate();
 
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
@@ -37,14 +39,16 @@ export const SecondForm = (props: SecondFormProps) => {
     })
 
     const handleFormSubmit = async (data: SecondFormValues) => {
-        console.log("Submitted Data:", data);
+        console.log("Dado atual:", data);
 
         try {
             await new Promise((resolve) => setTimeout(resolve, 10));
             dataArray.push(data);
 
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
-                console.log("Final Submitted Data:", dataArray);
+                console.log("Dados Finais:", dataArray);
+                navigate("/dashboard");
+
             } else {
                 props.switchToNextForm();
             }

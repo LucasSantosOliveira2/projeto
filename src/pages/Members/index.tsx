@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { CardMembers } from "../../components/CardMembers";
-import Malcom from "../../assets/Images/malcom.jpeg"
+import Malcom from "../../assets/Images/profile.png"
 
 export const Members = () => {
     return (
@@ -18,43 +18,40 @@ export const Members = () => {
                 <S.ContainerCard>
                     <CardMembers
                         image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
-                        additionalinfo="Fundou a Organização para a Unidade Afro-Americana, de inspiração separatista. Defensor dos direitos dos afro-americanos, conseguiu mobilizar brancos e negros na conscientização sobre os crimes cometidos contra a população afro-americana."
-                    />
-                    <CardMembers
-                        image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
-                        additionalinfo="Fundou a Organização para a Unidade Afro-Americana, de inspiração separatista. Defensor dos direitos dos afro-americanos, conseguiu mobilizar brancos e negros na conscientização sobre os crimes cometidos contra a população afro-americana."
-                    />
-                    <CardMembers
-                        image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
-                        additionalinfo="Fundou a Organização para a Unidade Afro-Americana, de inspiração separatista. Defensor dos direitos dos afro-americanos, conseguiu mobilizar brancos e negros na conscientização sobre os crimes cometidos contra a população afro-americana."
+                        name="Williamson Alison Freitas"
                     />
                 </S.ContainerCard>
                 <S.ContainerType>
-                    <S.Type>Alunos</S.Type>
+                    <S.Type>Alunos do Mestrado</S.Type>
+                    <S.Separator></S.Separator>
+                </S.ContainerType>
+                <S.ContainerCard>
+                    <CardMembers
+                        image={Malcom}
+                        name="Matheus"
+                    />
+
+                </S.ContainerCard>
+                <S.ContainerType>
+                    <S.Type>Alunos da Graduação</S.Type>
                     <S.Separator></S.Separator>
                 </S.ContainerType>
 
                 <S.ContainerCard>
                     <CardMembers
                         image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
+                        name="Lucas Santos"
+                        description="Aluno da Ciência da Computação."
                     />
                     <CardMembers
                         image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
+                        name="Ricardo Costa"
+                        description="Aluno da Engenharia de Software."
                     />
                     <CardMembers
                         image={Malcom}
-                        name="Malcom X"
-                        description="Malcolm X, mais tarde nomeado como Malik el-Shabazz, foi um afro-americano, ativista dos direitos humanos, ministro muçulmano e defensor do Nacionalismo Negro nos Estados Unidos."
+                        name="Tales Soares"
+                        description="Aluno da Engenharia de Software."
                     />
                 </S.ContainerCard>
             </S.Wrapper>

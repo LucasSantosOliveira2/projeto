@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.footer`
     display: flex;
@@ -50,4 +51,8 @@ export const ContainerLinks = styled.div`
     align-items: flex-start;
     gap: 10px;
     cursor: pointer;
+`
+export const StyledLink = styled(Link)`
+  text-decoration: none; 
+  color: inherit;
 `

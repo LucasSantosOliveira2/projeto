@@ -12,13 +12,17 @@ export const Footer = () => {
             <S.BottomBar>
                 <S.Title>Explore</S.Title>
                 <li>
-                    <a>Home</a>
+                    <S.StyledLink to="/" >
+                        Home
+                    </S.StyledLink>
                 </li>
                 <li>
                     <a>Sobre nós</a>
                 </li>
                 <li>
-                    <a>Contatos</a>
+                    <S.StyledLink to="/members" >
+                        Membros
+                    </S.StyledLink>
                 </li>
             </S.BottomBar>
             <S.ContainerSocialMedia>
