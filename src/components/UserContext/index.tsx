@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type UserData = {
+export type UserData = {
     name: string,
     email: string,
     given_name: string,

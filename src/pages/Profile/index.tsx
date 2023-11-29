@@ -13,20 +13,18 @@ export const Profile = () => {
 
     useEffect(() => {
         const storedUserInfo = window.localStorage.getItem("userInfo");
-        //console.log(storedUserInfo);
-        console.log('ok')
+        //console.log('ok');
 
         if (storedUserInfo) {
             const userInfo = JSON.parse(storedUserInfo);
-            setUser((prevUser) => {
-                if (JSON.stringify(prevUser) !== JSON.stringify(userInfo)) {
-                    console.log("setUser foi chamado");
-                    return userInfo;
-                }
-                return prevUser;
-            });
+
+            if (JSON.stringify(userInfo) !== JSON.stringify(userData)) {
+                setUser(userInfo);
+                console.log(userInfo);
+            }
         }
-    }, [setUser]);
+    }, [setUser, userData]);
+
 
 
     return (
