@@ -145,7 +145,6 @@ export const Required = styled.span`
   font-size: 1.2rem;
   color: #7551FF;
   font-weight: 500;
-
   `
 export const ButtonContainer = styled.div`
 display: flex;
@@ -160,4 +159,18 @@ export const CheckboxContainer = styled.div`
   width: 100%;
   align-items: center;
   gap: 10px;
+`
+export const ContainerFeelings = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 480px;
+  gap: 8px;
+`
+
+export const Feelings = styled.label`
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
 `
