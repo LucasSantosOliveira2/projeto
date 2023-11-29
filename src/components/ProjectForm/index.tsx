@@ -47,7 +47,7 @@ const SchemaForm = z.object({
 
 
 function ProjectForm(props: ProjectFormProps) {
-  const { handleSubmit, register, formState: { errors }, trigger, getValues } = useForm<FormProps>({
+  const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
     mode: 'all',
     resolver: zodResolver(SchemaForm),
@@ -79,11 +79,9 @@ function ProjectForm(props: ProjectFormProps) {
     }
   });
 
-
   const [analystNames, setAnalystNames] = useState(['']);
   const [tasksNames, setTasksNames] = useState(['']);
   const [numTasks, setNumTasks] = useState(0);
-
 
   const addAnalyst = () => {
     setAnalystNames([...analystNames, '']);
@@ -95,8 +93,12 @@ function ProjectForm(props: ProjectFormProps) {
       const updatedAnalystNames = [...analystNames];
       updatedAnalystNames.splice(index, 1);
       setAnalystNames(updatedAnalystNames);
+      const currentAnalysts = getValues('information.analystName');
+      delete currentAnalysts[index.toString()];
+      setValue('information.analystName', currentAnalysts);
     }
-  }
+  };
+
 
   const addTasks = () => {
     setTasksNames([...tasksNames, '']);
@@ -107,14 +109,17 @@ function ProjectForm(props: ProjectFormProps) {
       const updatedTasksNames = [...tasksNames];
       updatedTasksNames.splice(index, 1);
       setTasksNames(updatedTasksNames);
+      const currentTasks = getValues('information.tasksName');
+      delete currentTasks[index.toString()];
+      setValue('information.tasksName', currentTasks);
     }
-  }
+  };
 
-  const handleFormSubmit = (data: FormProps) => {
-    console.log(data);
-    props.switchToSecondForm(data.information.numParticipants, Object.values(data.information.tasksName));
-    props.onSave(data);
-  }
+  /* const handleFormSubmit = (data: FormProps) => {
+     console.log(data);
+     props.switchToSecondForm(data.information.numParticipants, Object.values(data.information.tasksName));
+     props.onSave(data);
+   }*/
 
   const [typeState, setTypeState] = useState({
     video: false,
@@ -131,7 +136,6 @@ function ProjectForm(props: ProjectFormProps) {
 
 
   };
-
 
   const handleValidationAndSave = () => {
     trigger().then((isValid) => {
