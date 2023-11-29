@@ -19,10 +19,11 @@ const SchemaForm = z.object({
 
 export type SecondFormValues = z.infer<typeof SchemaForm>;
 
+const dataArray: SecondFormValues[] = [];
+
+
 export const SecondForm = (props: SecondFormProps) => {
-    /* const [submittedData, setSubmittedData] = useState<Array<SecondFormValues>>(
-         Array.from({ length: props.tasksNames.length }, () => ({ description: { participantAnalysis: {} } }))
-     );*/
+
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
         criteriaMode: 'all',
@@ -33,13 +34,24 @@ export const SecondForm = (props: SecondFormProps) => {
                 participantAnalysis: {},
             },
         },
-    });
+    })
 
     const handleFormSubmit = async (data: SecondFormValues) => {
         console.log("Submitted Data:", data);
 
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+            dataArray.push(data);
 
-    };
+            if (props.currentTaskIndex === props.tasksNames.length - 1) {
+                console.log("Final Submitted Data:", dataArray);
+            } else {
+                props.switchToNextForm();
+            }
+        } catch (error) {
+            console.error("Erro ao enviar o formulário:", error);
+        }
+    }
 
     return (
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
