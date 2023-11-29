@@ -1,7 +1,6 @@
 import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
-import TabBar from "../../components/TabBar";
 import { ProjectCard } from "../../components/ProjectCard";
 
 export const Project = () => {

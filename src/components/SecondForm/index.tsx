@@ -2,7 +2,6 @@ import * as S from "./styles";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -10,51 +9,49 @@ type SecondFormProps = {
     tasksNames: string[];
     currentTaskIndex: number;
     switchToNextForm: () => void;
-}
-
-type SecondForm = z.infer<typeof SchemaForm>
+};
 
 const SchemaForm = z.object({
     description: z.object({
         participantAnalysis: z.record(z.string().min(1, 'Informe sua opinião')),
-    })
+    }),
 });
 
+export type SecondFormValues = z.infer<typeof SchemaForm>;
+
+const dataArray: SecondFormValues[] = [];
+
+
 export const SecondForm = (props: SecondFormProps) => {
-    /* console.log('Dados recebidos em SecondForm:');
-     console.log('Num Participants:', props.numParticipants);
-     console.log('Tasks Names:', props.tasksNames);
-     console.log('Num Tasks:', props.tasksNames.length)
 
- */
-    const [submittedData, setSubmittedData] = useState<SecondForm[]>([]);
 
-    const { handleSubmit, register, formState: { errors } } = useForm<SecondForm>({
+    const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
         criteriaMode: 'all',
         mode: 'all',
         resolver: zodResolver(SchemaForm),
         defaultValues: {
             description: {
                 participantAnalysis: {},
+            },
+        },
+    })
+
+    const handleFormSubmit = async (data: SecondFormValues) => {
+        console.log("Submitted Data:", data);
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+            dataArray.push(data);
+
+            if (props.currentTaskIndex === props.tasksNames.length - 1) {
+                console.log("Final Submitted Data:", dataArray);
+            } else {
+                props.switchToNextForm();
             }
+        } catch (error) {
+            console.error("Erro ao enviar o formulário:", error);
         }
-    });
-    const handleFormSubmit = (data: SecondForm) => {
-        setSubmittedData((prevData) => {
-            const newData = [...prevData];
-            newData[props.currentTaskIndex] = data;
-            console.log(newData);
-            console.log(props.currentTaskIndex);
-            return newData;
-        });
-    };
-
-    console.log(submittedData[props.currentTaskIndex]);
-
-
-    const switchToNextForm = () => {
-        props.switchToNextForm();
-    };
+    }
 
     return (
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -76,18 +73,11 @@ export const SecondForm = (props: SecondFormProps) => {
                 ))}
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>
-                    {props.currentTaskIndex < props.tasksNames.length - 1 ? (
-                        <S.ButtonSave type="submit" onClick={switchToNextForm}>
-                            Continuar
-                        </S.ButtonSave>
-                    ) : (
-                        <S.ButtonSave type="submit">
-                            Finalizar
-                        </S.ButtonSave>
-                    )}
+                    <S.ButtonSave type="submit">
+                        {props.currentTaskIndex === props.tasksNames.length - 1 ? "Finalizar" : "Continuar"}
+                    </S.ButtonSave>
                 </S.ButtonContainer>
-
             </S.FormContainer>
-        </S.Form >
+        </S.Form>
     );
 };

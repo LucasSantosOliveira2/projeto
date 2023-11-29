@@ -6,21 +6,26 @@ import { ContentProfile } from "../../components/ContentProfile";
 import { useUser } from "../../components/UserContext";
 import BackgroundImage from "../../assets/Images/BackgroundImage.png";
 
+
+
 export const Profile = () => {
     const { userData, setUser } = useUser();
-  
+
     useEffect(() => {
-      // Verificar se existem dados de usuário no localStorage
-      const storedUserInfo = window.localStorage.getItem("userInfo");
-      console.log(storedUserInfo);
-  
-      if (storedUserInfo) {
-        // Se existirem, configurar o estado do usuário com base nos dados armazenados
-        const userInfo = JSON.parse(storedUserInfo);
-        setUser(userInfo);
-      }
-    }, [setUser]);
-  
+        const storedUserInfo = window.localStorage.getItem("userInfo");
+        //console.log('ok');
+
+        if (storedUserInfo) {
+            const userInfo = JSON.parse(storedUserInfo);
+
+            if (JSON.stringify(userInfo) !== JSON.stringify(userData)) {
+                setUser(userInfo);
+                console.log(userInfo);
+            }
+        }
+    }, [setUser, userData]);
+
+
 
     return (
         <S.Wrapper>

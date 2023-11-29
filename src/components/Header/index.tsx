@@ -4,7 +4,7 @@ import { Logo } from './../Logo';
 export const Header = () => {
     return (
         <S.Wrapper>
-            <Logo name="ChatBot" />
+            <Logo name="Análise de Sentimento" />
             <S.Menu>
                 <li>
                     <S.StyledLink to="/" >
