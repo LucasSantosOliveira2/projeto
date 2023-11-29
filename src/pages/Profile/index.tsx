@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
