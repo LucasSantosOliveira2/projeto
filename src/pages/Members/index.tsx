@@ -41,17 +41,17 @@ export const Members = () => {
                     <CardMembers
                         image={Malcom}
                         name="Lucas Santos"
-                        description="Aluno da Ciência da Computação."
+                        description="Aluno do curso de Ciência da Computação na Universidade Federal do Pampa (UNIPAMPA)."
                     />
                     <CardMembers
                         image={Malcom}
                         name="Ricardo Costa"
-                        description="Aluno da Engenharia de Software."
+                        description="Aluno do curso de Engenharia de Software na Universidade Federal do Pampa (UNIPAMPA)."
                     />
                     <CardMembers
                         image={Malcom}
                         name="Tales Soares"
-                        description="Aluno da Engenharia de Software."
+                        description="Aluno do curso de Engenharia de Software na Universidade Federal do Pampa (UNIPAMPA)."
                     />
                 </S.ContainerCard>
             </S.Wrapper>

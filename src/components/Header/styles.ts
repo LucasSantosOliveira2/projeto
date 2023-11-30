@@ -8,7 +8,7 @@ export const Wrapper = styled.header`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    background-color: ${(props) => props.theme.colors.dark};
+    background-color: #111C44;
     color:${(props) => props.theme.colors.white};
     @media screen and (min-width: 768px) {
         padding: 30px 100px;
@@ -24,7 +24,7 @@ export const LoginButton = styled.button`
     border: none;
     outline:none;
     cursor: pointer;
-    background-color: ${(props) => props.theme.colors.purple};
+    background-color: #7551FF;
         @media screen and (min-width: 768px) {
             width: 120px;
         }

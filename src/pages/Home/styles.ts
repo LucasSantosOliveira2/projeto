@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
     gap: 20px;
     width: 100%;
     padding: 50px 30px;
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: #0B1437;
     @media screen and (min-width: 768px) {
         padding: 50px 100px;
         gap: 40px;
@@ -25,7 +25,7 @@ export const Header = styled.div`
 export const Title = styled.h1`
     font-size: 1.5rem;
     font-weight: 700;
-    color: ${(props) => props.theme.colors.dark};
+    color: white;
     @media screen and (min-width: 768px) {
         font-size: 2.5rem;
     }
@@ -38,7 +38,7 @@ export const Description = styled.p`
     font-size: 1.2rem;
     font-weight: 400;
     text-align: center;
-    color: ${(props) => props.theme.colors.dark};
+    color: white;
     @media screen and (min-width: 768px) {
         font-size: 2rem;
     }
@@ -87,7 +87,7 @@ export const TitleAbout = styled.h1`
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 2rem;
-    color: ${(props) => props.theme.colors.dark};
+    color: white;
     @media screen and (min-width: 768px) {
         font-size: 2rem;
     }
@@ -99,7 +99,7 @@ export const TextAbout = styled.p`
     font-size: 1rem;
     font-weight: 400;
     text-align: justify;
-    color: ${(props) => props.theme.colors.dark};
+    color: white;
     @media screen and (min-width: 768px) {
         font-size: 1.1rem;
     }

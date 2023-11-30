@@ -5,7 +5,7 @@ export const Wrapper = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: ${(props) => props.theme.colors.black};
+    background-color: #111C44;
     padding: 15px 24px;
     justify-content: space-around;
     @media screen and (min-width: 768px) {

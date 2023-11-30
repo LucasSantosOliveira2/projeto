@@ -6,7 +6,7 @@ export const Button = styled.button`
     font-weight: 700;
     line-height: 1.5rem;
     border-radius: 16px;
-    background-color: ${(props) => props.theme.colors.purple};
+    background-color: #7551FF;
     color: ${(props) => props.theme.colors.white};
     border: none;
     cursor:pointer;

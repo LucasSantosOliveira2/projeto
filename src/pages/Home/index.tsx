@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import FeelingsImage from "../../assets/Images/header.jpg"
-import Analitic from "../../assets/Images/analitic.jpg"
+import Analitic from "../../assets/Images/analitic.png"
 import Processing from "../../assets/Images/processing.jpg"
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
@@ -13,7 +13,7 @@ export const Home = () => {
             <Header />
             <S.Wrapper>
                 <S.Header>
-                    <S.Title>Entendendo Sentimentos e Emoções</S.Title>
+                    <S.Title>FAS - Ferramenta de Análise de Sentimentos</S.Title>
                     <S.Description> Compreenda, Extraia e Estude Sentimentos</S.Description>
                 </S.Header>
                 <Button name="Saiba mais" widht="250px" />
