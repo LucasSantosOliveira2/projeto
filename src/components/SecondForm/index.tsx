@@ -54,6 +54,11 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
             });
 
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
+
+                console.log(JSON.stringify({
+                    dataArray: dataArray,
+                    email: userEmail,
+                }))
                 
                 fetch('http://localhost:8080/project/create', { 
                     method: 'POST',
@@ -66,13 +71,14 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     }),
                     
                 }).then(response => {
-                    console.log(response);
+                    navigate("/project");
+                
+                    window.location.reload();
                 })
                 .catch(error => {
                     console.log(error);
                 });
-
-                navigate("/dashboard");
+                
             } else {
                 props.switchToNextForm();
             }
