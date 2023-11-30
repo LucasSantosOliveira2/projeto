@@ -1,15 +1,15 @@
 import * as S from "./styles";
 
-type ProjectCardProps = {
-    title?: string,
-    number?: string,
+type ProjectCardProps<T = {}> = {
+    title?: Extract<keyof T, string>;
+    number?: Extract<keyof T, string | number> | undefined;
 }
 
-export const ProjectCard = ({ title, number }: ProjectCardProps) => {
+export const ProjectCard = <T,>({ title, number }: ProjectCardProps<T>) => {
     return (
         <S.Wrapper>
             <S.InfoTitle>{title}</S.InfoTitle>
-            <S.InfoNumber>Projeto #{number}</S.InfoNumber>
-        </S.Wrapper >
-    )
+            <S.InfoNumber>{number !== undefined ? `Projeto #${number}` : ''}</S.InfoNumber>
+        </S.Wrapper>
+    );
 }
