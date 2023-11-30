@@ -43,8 +43,12 @@ export const Sidebar = () => {
         setActiveItem(itemName);
     }
 
+    const storedUserInfo = localStorage.getItem('userInfo');
+    const storedUserName = storedUserInfo ? JSON.parse(storedUserInfo).given_name : null;
+
     const handleLogout = async () => {
         try {
+            localStorage.removeItem('userInfo');
             await googleLogout();
             navigate('/');
         } catch (error) {
@@ -54,7 +58,7 @@ export const Sidebar = () => {
 
     return (
         <S.Wrapper>
-            <S.Title>Olá, {userData?.given_name}</S.Title>
+            <S.Title>Olá, {storedUserName || 'Usuário'}</S.Title>
             <S.Separator />
             <S.StyledLink to="/forms">
                 <S.ButtonCreateProject >Criar Projeto</S.ButtonCreateProject>
