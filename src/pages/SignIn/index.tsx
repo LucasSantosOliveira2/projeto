@@ -22,7 +22,22 @@ export const SignIn = () => {
                 const userInfo = userInfoResponse.data;
 
                 console.log(userInfo);
-
+                console.log(userInfo.email);
+                
+                fetch('http://localhost:8080/auth/login', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: userInfo.email,
+                        name: userInfo.name,
+                    }),
+                    
+                }).then(response => {
+                    console.log(response);
+                })
+                
                 setUser(userInfo);
 
                 window.localStorage.setItem('userInfo', JSON.stringify(userInfo));

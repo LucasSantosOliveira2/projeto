@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { FormProps, useNavigate } from "react-router-dom";
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -20,12 +20,18 @@ const SchemaForm = z.object({
 
 export type SecondFormValues = z.infer<typeof SchemaForm>;
 
-const dataArray: SecondFormValues[] = [];
+interface CombinedFormData {
+    secondForm: SecondFormValues;
+    projectFormData: FormProps | any;
+}
 
+const dataArray: CombinedFormData[] = [];
 
-export const SecondForm = (props: SecondFormProps) => {
+const userInfo = window.localStorage.getItem('userInfo');
+const userEmail = userInfo ? JSON.parse(userInfo).email : '';
+
+export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps | any }) => {
     const navigate = useNavigate();
-
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
         criteriaMode: 'all',
@@ -36,26 +42,44 @@ export const SecondForm = (props: SecondFormProps) => {
                 participantAnalysis: {},
             },
         },
-    })
+    });
 
     const handleFormSubmit = async (data: SecondFormValues) => {
-        console.log("Dado atual:", data);
 
         try {
             await new Promise((resolve) => setTimeout(resolve, 10));
-            dataArray.push(data);
+            dataArray.push({
+                secondForm: data,
+                projectFormData: props.projectFormData,
+            });
 
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
-                console.log("Dados Finais:", dataArray);
-                navigate("/dashboard");
+                
+                fetch('http://localhost:8080/project/create', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        dataArray: dataArray,
+                        email: userEmail,
+                    }),
+                    
+                }).then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
 
+                navigate("/dashboard");
             } else {
                 props.switchToNextForm();
             }
         } catch (error) {
             console.error("Erro ao enviar o formulário:", error);
         }
-    }
+    };
 
     return (
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>

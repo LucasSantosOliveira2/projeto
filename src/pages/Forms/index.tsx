@@ -5,7 +5,25 @@ import { Sidebar } from '../../components/Sidebar';
 import ProjectForm, { FormProps } from '../../components/ProjectForm';
 import { SecondForm } from '../../components/SecondForm';
 
-type ProjectFormDataState = FormProps | null;
+type ProjectFormDataState = { 
+    type: { 
+        video: boolean; 
+        texto: boolean; 
+        voz: boolean; 
+        mousetrack: boolean; 
+        ironia: boolean; 
+        polaridade: boolean; 
+        sentimento: boolean; 
+    }; 
+    information: { 
+        projectName: string; 
+        projectGoal: string; 
+        numParticipants: number; 
+        analystName: Record<string, string>; 
+        tasksName: Record<string, string>; 
+    }; 
+} | null;
+
 
 
 export const Forms = () => {
@@ -31,8 +49,6 @@ export const Forms = () => {
     console.log('Dados salvos:', projectFormData);
     //console.log("currentTaskIndex em Forms.tsx:", currentTaskIndex);
 
-
-
     return (
         <S.Wrapper>
             <S.SidebarContainer>
@@ -50,6 +66,7 @@ export const Forms = () => {
                         tasksNames={tasksNames}
                         currentTaskIndex={currentTaskIndex}
                         switchToNextForm={() => setCurrentTaskIndex(currentTaskIndex + 1)}
+                        projectFormData={projectFormData}
                     />
                 ) : null}
             </S.ContentContainer>
