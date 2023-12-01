@@ -15,8 +15,6 @@ export function Graphic() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-
         setChartData(data);
       })
       .catch(error => {
@@ -51,8 +49,8 @@ export function Graphic() {
         chartType="PieChart"
         data={combinedData}
         options={options}
-        width={"500px"}
-        height={"250px"}
+        width={"400px"}
+        height={"230px"}
       />
 
       <GaugeComponent
@@ -85,7 +83,13 @@ export function Graphic() {
             },
           ]
         }}
-        value={87}
+        style={
+          {
+            width: 400,
+            height: 320,
+          }
+        }
+        value={20}
       />
     </>
   );
