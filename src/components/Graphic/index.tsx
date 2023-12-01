@@ -1,56 +1,61 @@
-import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { useState, useEffect } from "react";
+import { Chart } from "react-google-charts";
+import GaugeComponent from 'react-gauge-component'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const labels = ["Nojo", "Alegria", "Tristeza", "Medo", "Surpresa", "Raiva", "Outros"];
-
-const data = {
-  labels: labels,
-  datasets: [{
-    label: 'Esconder/mostrar gráfico',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)'
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)'
-    ],
-    borderWidth: 1
-  }]
-};
-
-const options = {
-  responsive: false,
-};
 
 export function Graphic() {
-  return <Bar options={options} data={data} width={700} height={500} />;
+  const [chartData, setChartData] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/sentimentos/mockGrafico', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+        setChartData(data);
+      })
+      .catch(error => {
+        console.error('Erro ao obter dados:', error);
+      });
+  }, []);
+
+  const options = {
+    title: "Gráfico de Sentimentos",
+    backgroundColor: "#111C44",
+    titleTextStyle: {
+      color: 'white',
+      fontSize: 20,
+    },
+    legend: {
+      textStyle: {
+        color: 'white',
+        fontSize: 12,
+      }
+    },
+  };
+
+  const formattedData = chartData
+    ? Object.entries(chartData).map(([emoção, porcentagem]) => [emoção, porcentagem])
+    : [];
+
+  const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
+
+  return (
+    <>
+      <Chart
+        chartType="PieChart"
+        data={combinedData}
+        options={options}
+        width={"500px"}
+        height={"250px"} 
+      />
+
+      <GaugeComponent />
+    </>
+  );
 }
