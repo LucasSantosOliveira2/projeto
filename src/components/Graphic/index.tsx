@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
-import GaugeComponent from 'react-gauge-component'
-
 
 export function Graphic() {
   const [chartData, setChartData] = useState(null);

@@ -20,9 +20,6 @@ export const SignIn = () => {
                 });
 
                 const userInfo = userInfoResponse.data;
-
-                console.log(userInfo);
-                console.log(userInfo.email);
                 
                 fetch('http://localhost:8080/auth/login', { 
                     method: 'POST',
@@ -35,7 +32,7 @@ export const SignIn = () => {
                     }),
                     
                 }).then(response => {
-                    console.log(response);
+                   
                 })
                 
                 setUser(userInfo);

@@ -12,8 +12,6 @@ interface project {
 export const Project = () => {
   const [projects, setProjects] = useState<project[]>([]);
 
-  const sup: { nomeProjeto: any; idProjeto: any }[] = [];
-
   const userInfo = window.localStorage.getItem("userInfo");
   const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
@@ -46,11 +44,11 @@ export const Project = () => {
       <S.ContentContainer>
         <S.InfoContainer>
           <S.Title>Projetos</S.Title>
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <ProjectCard
-              key={index}
               title={project.nomeProjeto}
-              number={(index + 1).toString()}
+              id={project.idProjeto
+              }
             />
           ))}
         </S.InfoContainer>

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     height: 108px;
     display: flex;
     padding-top: 23px;
+    padding-bottom: 100px;
     align-items: center;
     border-radius: 20px;
     flex-direction: column;
@@ -17,6 +18,7 @@ export const InfoTitle = styled.h1`
    font-size: 1rem;
    font-weight: 500;
    line-height: 1rem; 
+   margin-bottom: 1rem;
 `
 export const InfoNumber = styled.h1`
    font-size: 0.875rem;

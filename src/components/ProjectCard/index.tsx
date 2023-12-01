@@ -1,15 +1,16 @@
+import { ButtonDeleteProject } from "../ButtonDeleteProject";
 import * as S from "./styles";
 
-type ProjectCardProps<T = {}> = {
-    title?: Extract<keyof T, string>;
-    number?: Extract<keyof T, string | number> | undefined;
+type ProjectCardProps = {
+    title: string;
+    id: any;
 }
 
-export const ProjectCard = <T,>({ title, number }: ProjectCardProps<T>) => {
+export const ProjectCard = ({ title, id }: ProjectCardProps) => {
     return (
         <S.Wrapper>
             <S.InfoTitle>{title}</S.InfoTitle>
-            <S.InfoNumber>{number !== undefined ? `Projeto #${number}` : ''}</S.InfoNumber>
+            <ButtonDeleteProject widht={"200px"} name={"Excluir Projeto"} projectId={ id } />
         </S.Wrapper>
     );
 }
