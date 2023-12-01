@@ -47,12 +47,16 @@ export const Sidebar = () => {
     const storedUserName = storedUserInfo ? JSON.parse(storedUserInfo).given_name : null;
 
     const handleLogout = async () => {
-        try {
-            localStorage.removeItem('userInfo');
-            await googleLogout();
-            navigate('/');
-        } catch (error) {
-            console.error('Erro durante o logout:', error);
+        const shouldLogout = window.confirm("Tem certeza de que deseja sair?");
+        
+        if (shouldLogout) {
+            try {
+                localStorage.removeItem('userInfo');
+                await googleLogout();
+                navigate('/');
+            } catch (error) {
+                console.error('Erro durante o logout:', error);
+            }
         }
     };
 

@@ -49,7 +49,7 @@ export const Menu = styled.div`
     align-items: center;
     gap: 20px;
     padding: 10px 10px;
-    width: 380px;
+    width: 60px;
     background-color:#111C44;
     color: white;
     height: 61px;

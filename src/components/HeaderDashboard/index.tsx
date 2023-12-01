@@ -41,10 +41,10 @@ export const HeaderDashboard = () => {
           <S.CurrentPage>{pageName}</S.CurrentPage>
         </S.Info>
         <S.Menu>
-          <S.InputContainer>
+          {/* <S.InputContainer>
             <FaSearch />
             <S.Input placeholder="Busca" type="text" id="Busca" name="Busca" />
-          </S.InputContainer>
+          </S.InputContainer> */}
           <S.BurguerMenu>
             <ImMenu />
           </S.BurguerMenu>

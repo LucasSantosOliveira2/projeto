@@ -24,7 +24,7 @@ export function Graphic() {
 
   const options = {
     title: "Gráfico de Sentimentos",
-    backgroundColor: "#111C44",
+    backgroundColor: "white",
     titleTextStyle: {
       color: 'white',
       fontSize: 20,
@@ -49,11 +49,11 @@ export function Graphic() {
         chartType="PieChart"
         data={combinedData}
         options={options}
-        width={"400px"}
-        height={"230px"}
+        width={"500px"}
+        height={"330px"}
       />
 
-      <GaugeComponent
+      {/* <GaugeComponent
         arc={{
           subArcs: [
             {
@@ -90,7 +90,7 @@ export function Graphic() {
           }
         }
         value={20}
-      />
+      /> */}
     </>
   );
 }

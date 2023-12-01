@@ -48,9 +48,10 @@ export const Profile = () => {
                         />
 
                         <S.ProfileName>{userData && userData.name}</S.ProfileName>
+                        <S.ProfileEmail>{userData?.email}</S.ProfileEmail>
                     </S.ProfileContent>
                 </S.MediumProfile>
-                <S.InfoContainer>
+                {/* <S.InfoContainer>
                     <S.Title>Informações Gerais</S.Title>
                     <S.InfoContent>
                         <ContentProfile type="E-mail" name={userData?.email} />
@@ -58,7 +59,7 @@ export const Profile = () => {
                         <ContentProfile type="Departamento" />
                         <ContentProfile type="Organização" />
                     </S.InfoContent>
-                </S.InfoContainer>
+                </S.InfoContainer> */}
 
             </S.ContentContainer>
         </S.Wrapper>
