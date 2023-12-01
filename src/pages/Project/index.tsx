@@ -29,10 +29,7 @@ export const Project = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.forEach((element: { nomeProjeto: any; idProjeto: any }) => {
-          sup.push(element);
-        });
-        setProjects(sup);
+        setProjects(data);
       })
       .catch((error) => {
         console.error(error);
