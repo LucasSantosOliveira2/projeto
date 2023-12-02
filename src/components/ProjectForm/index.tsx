@@ -60,7 +60,6 @@ function ProjectForm(props: ProjectFormProps) {
         polaridade: false,
         sentimento: false,
       }
-
     }
   });
 
@@ -82,7 +81,7 @@ function ProjectForm(props: ProjectFormProps) {
       delete currentAnalysts[index.toString()];
       setValue('information.analystName', currentAnalysts);
     }
-  };
+  }
 
 
   const addTasks = () => {
@@ -98,7 +97,7 @@ function ProjectForm(props: ProjectFormProps) {
       delete currentTasks[index.toString()];
       setValue('information.tasksName', currentTasks);
     }
-  };
+  }
 
   /* const handleFormSubmit = (data: FormProps) => {
      console.log(data);

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import * as S from "./styles";
 import { SidebarItem } from "../SidebarItem";
-import { BiSolidDashboard, BiSolidUser, BiSolidFolder, BiSolidExit } from "react-icons/bi";
+import { BiSolidUser, BiSolidFolder, BiSolidExit } from "react-icons/bi";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useUser } from '../UserContext';
 import { IoMdAnalytics } from "react-icons/io";
 import { googleLogout } from '@react-oauth/google';
 
@@ -12,7 +11,6 @@ export const Sidebar = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-    const { userData } = useUser();
 
 
     const [activeItem, setActiveItem] = useState('project');
@@ -48,7 +46,7 @@ export const Sidebar = () => {
 
     const handleLogout = async () => {
         const shouldLogout = window.confirm("Tem certeza de que deseja sair?");
-        
+
         if (shouldLogout) {
             try {
                 localStorage.removeItem('userInfo');
@@ -74,14 +72,6 @@ export const Sidebar = () => {
                     name="Projetos"
                     isActive={activeItem === 'project'}
                     onClick={() => handleItemClick('project')}
-                />
-            </S.StyledLink>
-            <S.StyledLink to="/dashboard">
-                <SidebarItem
-                    icon={<BiSolidDashboard />}
-                    name="Dashboard"
-                    isActive={activeItem === 'dashboard'}
-                    onClick={() => handleItemClick('dashboard')}
                 />
             </S.StyledLink>
 

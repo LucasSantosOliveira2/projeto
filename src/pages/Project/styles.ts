@@ -24,7 +24,7 @@ export const ContentContainer = styled.div`
     margin-top: 130px;
   }
   @media screen and (min-width: 1200px) {
-    margin-top: 125px;
+    margin-top: 160px;
   }
 `
 export const Title = styled.h1`
@@ -49,4 +49,11 @@ export const StyledLink = styled(Link)`
   text-decoration: none; 
   color: inherit;
   width: 100%;
+`
+
+export const ProjectMessage = styled.h1`
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  color: white;
 `

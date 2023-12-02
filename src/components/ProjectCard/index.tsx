@@ -38,13 +38,15 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
                 <S.InfoTitle>{title}</S.InfoTitle>
             </S.ContentContainer>
             <S.OptionContainer>
-                <S.Option><HiMiniSquaresPlus />Detalhes</S.Option>
+                <S.StyledLink to="/dashboard">
+                    <S.Option><HiMiniSquaresPlus />Dashboard</S.Option>
+                </S.StyledLink>
+
                 <S.StyledLink to="/forms">
                     <S.Option><MdModeEdit />Editar</S.Option>
                 </S.StyledLink>
                 <S.Option onClick={handleDeleteProject}><MdDelete />Excluir</S.Option>
             </S.OptionContainer>
-            {/* <ButtonDeleteProject widht={"200px"} name={"Excluir Projeto"} projectId={id} />*/}
         </S.Wrapper>
     );
 }

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProps, useNavigate } from "react-router-dom";
+import { Checkbox } from "../CheckBox";
 import { toast } from 'react-toastify';
 
 
@@ -17,6 +18,9 @@ type SecondFormProps = {
 const SchemaForm = z.object({
     description: z.object({
         participantAnalysis: z.record(z.string().min(1, 'Informe sua opinião')),
+    }),
+    option: z.object({
+        setenca: z.boolean(),
     }),
 });
 
@@ -43,11 +47,14 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
             description: {
                 participantAnalysis: {},
             },
+            option: {
+                setenca: false,
+            }
         },
     });
 
     const handleFormSubmit = async (data: SecondFormValues) => {
-
+        console.log(data)
         try {
             await new Promise((resolve) => setTimeout(resolve, 10));
             dataArray.push({
@@ -60,7 +67,18 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                 console.log(JSON.stringify({
                     dataArray: dataArray,
                     email: userEmail,
-                }))
+                }));
+
+                toast.info('✅ Carregando', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
 
                 fetch('http://localhost:8080/project/create', {
                     method: 'POST',
@@ -71,24 +89,12 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         dataArray: dataArray,
                         email: userEmail,
                     }),
-
-                }).then(response => {
-                    toast.info('✅ Carregando', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                    });
+                }).then(() => {
                     navigate("/project");
                     window.location.reload();
-                })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                }).catch(error => {
+                    console.log(error);
+                });
 
             } else {
                 props.switchToNextForm();
@@ -114,7 +120,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         {errors.description?.participantAnalysis?.[index]?.message && (
                             <S.Error>{errors.description?.participantAnalysis?.[index]?.message}</S.Error>
                         )}
-                    </S.FieldContainer>
+                        <Checkbox checkboxType="option.setenca" checkboxName="Setença" register={register} />                    </S.FieldContainer>
                 ))}
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>

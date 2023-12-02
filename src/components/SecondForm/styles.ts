@@ -32,7 +32,7 @@ export const FieldContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    gap: 15px;
 `
 export const TextArea = styled.textarea`
   width: 100%;
