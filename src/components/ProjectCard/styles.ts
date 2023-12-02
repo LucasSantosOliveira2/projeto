@@ -43,14 +43,12 @@ export const NumberContainer = styled.div`
   font-weight: 400;
   color: white;
 `
-
 export const ContentContainer = styled.div`
    display: flex;
    align-items: center;
    width: 100%;
   gap: 20px;
 `
-
 export const OptionContainer = styled.div`
    display: flex;
    width: 100%;

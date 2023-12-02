@@ -4,7 +4,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProps, useNavigate } from "react-router-dom";
 import { Checkbox } from "../CheckBox";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 type SecondFormProps = {
@@ -78,7 +80,11 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     draggable: true,
                     progress: undefined,
                     theme: "colored",
-                });
+                    style: {
+                        background: '#7551FF',
+                        color: '#ffffff',
+                    },
+                })
 
                 fetch('http://localhost:8080/project/create', {
                     method: 'POST',
@@ -129,6 +135,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     </S.ButtonSave>
                 </S.ButtonContainer>
             </S.FormContainer>
+            <ToastContainer />
         </S.Form>
     );
 };
