@@ -8,7 +8,7 @@ import { Project } from './pages/Project';
 import { SignIn } from './pages/SignIn';
 import { Analysis } from './pages/Analysis';
 import { Forms } from './pages/Forms';
-
+import { EditProject } from './components/EditProject';
 function MainRoutes() {
     return (
         <Routes>
@@ -22,7 +22,7 @@ function MainRoutes() {
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/forms" element={<Forms />} />
             <Route path="/secondform" element={<Forms />} />
-
+            <Route path="/editproject" element={<EditProject />} />
         </Routes>
     )
 }

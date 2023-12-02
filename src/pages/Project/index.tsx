@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { ProjectCard } from "../../components/ProjectCard";
+import TabBar from "../../components/TabBar";
 
 interface project {
   nomeProjeto: string;
@@ -42,15 +43,18 @@ export const Project = () => {
       </S.SidebarContainer>
 
       <S.ContentContainer>
+        <TabBar tabs={['Todos', 'Recentes', 'Modificado']} defaultTab="Todos" />
         <S.InfoContainer>
-          <S.Title>Projetos</S.Title>
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <ProjectCard
+              key={project.idProjeto}
               title={project.nomeProjeto}
-              id={project.idProjeto
-              }
+              projectId={project.idProjeto}
+              number={index + 1}
             />
           ))}
+          <ProjectCard title="Jaydon Ekstrom Bothman" projectId={1222} number={1} />
+          <ProjectCard title="teste" projectId={1222} number={2} />
         </S.InfoContainer>
       </S.ContentContainer>
     </S.Wrapper>

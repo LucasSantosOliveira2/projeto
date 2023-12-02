@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -42,4 +43,10 @@ export const InfoContainer = styled.div`
     border-radius: 20px;
     gap: 20px;
     align-items: center;
+`
+
+export const StyledLink = styled(Link)`
+  text-decoration: none; 
+  color: inherit;
+  width: 100%;
 `

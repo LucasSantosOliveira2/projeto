@@ -3,7 +3,7 @@ import * as S from "./styles";
 type ButtonDeleteProjectProps = {
     widht: string,
     name: string,
-    projectId: string
+    projectId: number /*troquei de string pra number*/
 }
 
 export const ButtonDeleteProject = ({ widht, name, projectId }: ButtonDeleteProjectProps) => {

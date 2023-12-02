@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProps, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 type SecondFormProps = {
     switchToProjectForm: () => void;
@@ -22,7 +24,7 @@ export type SecondFormValues = z.infer<typeof SchemaForm>;
 
 interface CombinedFormData {
     secondForm: SecondFormValues;
-    projectFormData: FormProps | any;
+    projectFormData: FormProps;/*tirei o any */
 }
 
 const dataArray: CombinedFormData[] = [];
@@ -30,7 +32,7 @@ const dataArray: CombinedFormData[] = [];
 const userInfo = window.localStorage.getItem('userInfo');
 const userEmail = userInfo ? JSON.parse(userInfo).email : '';
 
-export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps | any }) => {
+export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps })/*tire o any */ => {
     const navigate = useNavigate();
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({
@@ -59,8 +61,8 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     dataArray: dataArray,
                     email: userEmail,
                 }))
-                
-                fetch('http://localhost:8080/project/create', { 
+
+                fetch('http://localhost:8080/project/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -69,16 +71,25 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         dataArray: dataArray,
                         email: userEmail,
                     }),
-                    
+
                 }).then(response => {
+                    toast.info('✅ Carregando', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
                     navigate("/project");
-                
                     window.location.reload();
                 })
-                .catch(error => {
-                    console.log(error);
-                });
-                
+                    .catch(error => {
+                        console.log(error);
+                    });
+
             } else {
                 props.switchToNextForm();
             }

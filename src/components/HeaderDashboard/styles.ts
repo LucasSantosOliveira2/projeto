@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
     z-index: 100; 
     @media screen and (min-width: 1200px) {
         margin-left: 320px;
-
     }
 `
 export const Content = styled.div`

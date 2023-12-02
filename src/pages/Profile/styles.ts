@@ -32,7 +32,6 @@ export const MediumProfile = styled.div`
     align-items: center;
     flex-direction: column;
     width: 80%;
-    height: 40%;
     background-color: #111C44;
     border-radius: 16px;
     margin-top: 20px;    
@@ -69,14 +68,6 @@ export const ProfileName = styled.h1`
     line-height: 2rem;
     color: white;
 `
-
-export const ProfileEmail = styled.h1`
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 2rem;
-    color: white;
-`
-
 export const Title = styled.h1`
     font-size: 1rem;
     font-weight: 700;
