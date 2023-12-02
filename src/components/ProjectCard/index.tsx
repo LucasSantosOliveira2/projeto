@@ -1,14 +1,18 @@
 import * as S from "./styles";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import { HiMiniSquaresPlus } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom';
 
 type ProjectCardProps = {
     title: string;
     number: number;
-    projectId: number /*troquei de string pra number*/
+    projectId: number;
 }
 
 export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
+
+    const navigate = useNavigate();
+
     const handleDeleteProject = async () => {
         try {
             // Faça uma solicitação para o endpoint de exclusão
@@ -18,7 +22,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: projectId, // Certifique-se de que o nome do campo corresponde ao esperado pelo servidor
+                    id: projectId
                 }),
             });
 
@@ -31,6 +35,26 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
             alert('Erro ao excluir o projeto');
         }
     };
+
+    const handleEditProject = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/sentimentos/getProject/' + projectId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            response.json().then(data => 
+                navigate('/forms', { 
+                    state: { projectData: data }
+                })
+            );
+        } catch (error) {
+            alert('Erro ao excluir o projeto:' + error);
+        }
+    };
+
     return (
         <S.Wrapper>
             <S.ContentContainer>
@@ -42,8 +66,8 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
                     <S.Option><HiMiniSquaresPlus />Dashboard</S.Option>
                 </S.StyledLink>
 
-                <S.StyledLink to="/forms">
-                    <S.Option><MdModeEdit />Editar</S.Option>
+                <S.StyledLink to="">
+                    <S.Option onClick={handleEditProject}><MdModeEdit />Editar</S.Option>
                 </S.StyledLink>
                 <S.Option onClick={handleDeleteProject}><MdDelete />Excluir</S.Option>
             </S.OptionContainer>

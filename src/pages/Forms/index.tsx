@@ -5,6 +5,7 @@ import { Sidebar } from '../../components/Sidebar';
 import ProjectForm, { FormProps } from '../../components/ProjectForm';
 import { SecondForm } from '../../components/SecondForm';
 
+
 type ProjectFormDataState = { 
     type: { 
         video: boolean; 
@@ -45,9 +46,6 @@ export const Forms = () => {
         setCurrentForm('second');
         setCurrentTaskIndex(0);
     };
-
-    console.log('Dados salvos:', projectFormData);
-    //console.log("currentTaskIndex em Forms.tsx:", currentTaskIndex);
 
     return (
         <S.Wrapper>

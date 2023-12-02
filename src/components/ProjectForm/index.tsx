@@ -4,6 +4,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox } from "../CheckBox";
+import { useLocation } from 'react-router-dom';
 
 type ProjectFormProps = {
   switchToSecondForm: (numParticipants: number, tasksNames: string[]) => void;
@@ -39,15 +40,22 @@ const SchemaForm = z.object({
 
 
 function ProjectForm(props: ProjectFormProps) {
+
+  const location = useLocation();
+  const projectData = location.state?.projectData;
+  // console.log("Json: ");
+  // console.log(projectData);
+  // console.log("Id do projeto no banco: " + projectData.id);
+
   const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
     mode: 'all',
     resolver: zodResolver(SchemaForm),
     defaultValues: {
       information: {
-        projectName: "",
-        projectGoal: "",
-        numParticipants: 0,
+        projectName: projectData?.nome || "",
+        projectGoal: projectData?.objetivo_projeto || "",
+        numParticipants: projectData?.num_participantes || 0,
         analystName: {},
         tasksName: {}
       },
@@ -141,7 +149,7 @@ function ProjectForm(props: ProjectFormProps) {
   }
 
 
-
+  
   return (
     <S.Form >
       <S.FormContainer>
@@ -149,8 +157,8 @@ function ProjectForm(props: ProjectFormProps) {
         <S.FieldContainer>
           <S.Label>Nome do Projeto<S.Required>*</S.Required></S.Label>
           <S.Input
-            placeholder="Nome do Projeto"
-            {...register('information.projectName')}
+            placeholder={"Nome do Projeto"}
+            {...register('information.projectName', { value: projectData?.nome || '' })}
             type="text"
           />
           {errors.information?.projectName?.message && (
