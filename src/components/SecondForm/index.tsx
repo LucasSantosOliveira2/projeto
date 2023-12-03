@@ -63,13 +63,13 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                 secondForm: data,
                 projectFormData: props.projectFormData,
             });
-    
+
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
                 console.log(JSON.stringify({
                     dataArray: dataArray,
                     email: userEmail,
                 }));
-    
+
                 toast.info('⏳ Analisando...', {
                     position: "top-right",
                     autoClose: false,
@@ -83,23 +83,21 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         background: '#7551FF',
                         color: '#ffffff',
                     },
-                    onClose: () => { 
-                        fetch('http://localhost:8080/project/create', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                dataArray: dataArray,
-                                email: userEmail,
-                            }),
-                        }).then(() => {
-                            navigate("/project");
-                            window.location.reload();
-                        }).catch(error => {
-                            console.log(error);
-                        });
+                });
+                fetch('http://localhost:8080/project/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
                     },
+                    body: JSON.stringify({
+                        dataArray: dataArray,
+                        email: userEmail,
+                    }),
+                }).then(() => {
+                    navigate("/project");
+                    window.location.reload();
+                }).catch(error => {
+                    console.log(error);
                 });
             } else {
                 props.switchToNextForm();
@@ -108,7 +106,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
             console.error("Erro ao enviar o formulário:", error);
         }
     };
-    
+
 
     return (
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
