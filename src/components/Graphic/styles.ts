@@ -1,27 +1,19 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.footer`
-  max-width: 900px;
-  width: 90%;
-  height: 900px;
-  display: flex;
-  gap: 5px;
-  padding: 23px 0px 29px 22px;
-  align-items: flex-start;
+export const Wrapper = styled.div`
+  max-width: 778px;
+  width: 100%;
+  height: 345px;
   border-radius: 20px;
-  flex-direction: column;
-  background-color: #0B1437;
-`;
-export const ContentContainer = styled.div`
+  background: #111C44;
   display: flex;
+  padding: 20px;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  margin-top: 20px;
-  @media screen and (min-width: 768px) {
-    margin-top: 25px;
-  }
-  @media screen and (min-width: 1200px) {
-    margin-top: 20px;
-  }
-`;
+`
+export const Title = styled.h1`
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+  color: white;
+`

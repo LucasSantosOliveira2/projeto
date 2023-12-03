@@ -7,39 +7,55 @@ export const Wrapper = styled.section`
   min-height: 100vh;
   height: 100%;
   margin-bottom: 20px;
-`;
+`
+
+export const SidebarContainer = styled.div`
+  flex: 1;
+`
 export const ContentContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
-  gap: 10px;
-  width: 75%;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  padding: 0px 10px;
   margin-top: 185px;
   @media screen and (min-width: 768px) {
     margin-top: 130px;
   }
   @media screen and (min-width: 1200px) {
-    margin-top: 125px;
+    margin-top: 160px;
   }
-  margin-left: 10%;
-`;
-
+  `
 
 export const GraphicWrapper = styled.div`
-  width: calc(33.33% - 20px); /* Defina a largura fixa com base na porcentagem desejada */
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 20px; /* Adicione espaço abaixo de cada GraphicWrapper */
-`;
-
-export const SidebarContainer = styled.div`
-  flex: 1;
-`;
+  max-width: 389px;
+  width: 100%;
+  height: 345px;
+  border-radius: 20px;
+  background: #111C44;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  flex-direction: column;
+`
 
 export const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 2rem;
+  line-height: 1.75rem;
   color: white;
-`;
+`
+
+export const ContainerInfo = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`

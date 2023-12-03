@@ -2,30 +2,62 @@ import * as S from "./styles";
 import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { Graphic } from "../../components/Graphic";
+import { PredominantSentiment } from "../../components/PredominantSentiment";
+import { useState, useEffect } from "react";
+
 
 export const Dashboard = () => {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/sentimentos/mockGrafico', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => {
+        console.error('Erro ao obter dados:', error);
+      });
+  }, []);
+
+
+  const formattedData: [string, number][] = data
+    ? Object.entries(data).map(([emoção, porcentagem]) => [emoção, Number(porcentagem)])
+    : [];
+
+  const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
+
+  console.log(combinedData)
+  const mostDominantEmotion: [string, number] = formattedData.reduce(
+    (prev: [string, number], current: [string, number]) =>
+      prev[1] > current[1] ? prev : current,
+    ["", 0]
+  );
+
+  const [dominantEmotion, dominantPercentage] = mostDominantEmotion;
+  console.log("Resultado da emoção dominante", dominantEmotion, dominantPercentage);
+
   return (
     <S.Wrapper>
-      <Sidebar />
-      <HeaderDashboard />
+      <S.SidebarContainer>
+        <Sidebar />
+        <HeaderDashboard />
+      </S.SidebarContainer>
       <S.ContentContainer>
-
-        <S.GraphicWrapper>
-            <S.Title>Gráfico de Sentimentos - Geral</S.Title>
-          <Graphic />
-        </S.GraphicWrapper>
-
-        <S.GraphicWrapper>
-        <S.Title>Gráfico de Sentimentos - Participante X</S.Title>
-          <Graphic />
-        </S.GraphicWrapper>
-
-        <S.GraphicWrapper>
-        <S.Title>Gráfico de Sentimentos - Tarefa X</S.Title>
-          <Graphic />
-        </S.GraphicWrapper>
-
+        <S.ContainerInfo>
+          <PredominantSentiment emotion={dominantEmotion} percentage={dominantPercentage} />
+          <S.GraphicWrapper>
+            <S.Title>Nuvem de Palavras</S.Title>
+          </S.GraphicWrapper>
+        </S.ContainerInfo>
+        <Graphic />
       </S.ContentContainer>
-    </S.Wrapper>
+    </S.Wrapper >
   );
 };

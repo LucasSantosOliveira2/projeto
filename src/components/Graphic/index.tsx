@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
+import * as S from "./styles";
 
 export function Graphic() {
   const [chartData, setChartData] = useState(null);
@@ -21,8 +22,7 @@ export function Graphic() {
   }, []);
 
   const options = {
-    title: "Gráfico de Sentimentos",
-    backgroundColor: "white",
+    backgroundColor: "#111C44",
     titleTextStyle: {
       color: 'white',
       fontSize: 20,
@@ -42,13 +42,15 @@ export function Graphic() {
   const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
 
   return (
-    <>
+    <S.Wrapper>
+      <S.Title>Grafico de Sentimentos</S.Title>
       <Chart
         chartType="PieChart"
         data={combinedData}
         options={options}
-        width={"500px"}
-        height={"330px"}
+        width="100%"
+        height="100%"
+
       />
 
       {/* <GaugeComponent
@@ -89,6 +91,6 @@ export function Graphic() {
         }
         value={20}
       /> */}
-    </>
+    </S.Wrapper>
   );
 }
