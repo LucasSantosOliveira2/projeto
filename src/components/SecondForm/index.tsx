@@ -56,49 +56,81 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
     });
 
     const handleFormSubmit = async (data: SecondFormValues) => {
-        console.log(data);
+
         try {
+
             await new Promise((resolve) => setTimeout(resolve, 10));
             dataArray.push({
                 secondForm: data,
                 projectFormData: props.projectFormData,
             });
 
-            if (props.currentTaskIndex === props.tasksNames.length - 1) {
-                console.log(JSON.stringify({
-                    dataArray: dataArray,
-                    email: userEmail,
-                }));
+            const projectForm = props.projectFormData;
+            const idProjeto = (projectForm as any).information.id;
 
-                toast.info('⏳ Analisando...', {
-                    position: "top-right",
-                    autoClose: false,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: false,
-                    draggable: false,
-                    progress: undefined,
-                    theme: "colored",
-                    style: {
-                        background: '#7551FF',
-                        color: '#ffffff',
-                    },
-                });
-                fetch('http://localhost:8080/project/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        dataArray: dataArray,
-                        email: userEmail,
-                    }),
-                }).then(() => {
-                    navigate("/project");
-                    window.location.reload();
-                }).catch(error => {
-                    console.log(error);
-                });
+            if (props.currentTaskIndex === props.tasksNames.length - 1) {
+
+                if (idProjeto == 0) {
+                    toast.info('⏳ Analisando...', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        style: {
+                            background: '#7551FF',
+                            color: '#ffffff',
+                        },
+                    });
+                    fetch('http://localhost:8080/project/create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            dataArray: dataArray,
+                            email: userEmail,
+                        }),
+                    }).then(() => {
+                        navigate("/project");
+                        window.location.reload();
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                } else {
+                    toast.info('⏳ Atualizando e Analisando...', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        style: {
+                            background: '#7551FF',
+                            color: '#ffffff',
+                        },
+                    });
+                    fetch('http://localhost:8080/project/update', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            dataArray: dataArray,
+                            email: userEmail,
+                        }),
+                    }).then(() => {
+                        navigate("/project");
+                        window.location.reload();
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                }
             } else {
                 props.switchToNextForm();
             }

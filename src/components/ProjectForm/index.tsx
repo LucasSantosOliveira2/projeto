@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,11 +12,11 @@ type ProjectFormProps = {
   title: string;
 }
 
-
 export type FormProps = z.infer<typeof SchemaForm>
 
 const SchemaForm = z.object({
   information: z.object({
+    id: z.number().int().min(0, 'Informe o id do projeto'),
     projectName: z.string().min(1, 'Informe o nome do projeto'),
     projectGoal: z.string().min(1, 'Informe o objetivo do projeto'),
     numParticipants: z.number().int().min(1, 'Número de participantes deve ser mínimo 1'),
@@ -50,6 +50,7 @@ function ProjectForm(props: ProjectFormProps) {
     resolver: zodResolver(SchemaForm),
     defaultValues: {
       information: {
+        id: projectData?.id || 0,
         projectName: projectData?.nome || "",
         projectGoal: projectData?.objetivo_projeto || "",
         numParticipants: projectData?.num_participantes || 0,

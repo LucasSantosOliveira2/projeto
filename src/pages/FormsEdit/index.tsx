@@ -17,6 +17,7 @@ type ProjectFormDataState = {
         sentimento: boolean; 
     }; 
     information: { 
+        id: number;
         projectName: string; 
         projectGoal: string; 
         numParticipants: number; 
