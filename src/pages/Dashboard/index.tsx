@@ -4,9 +4,13 @@ import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { Graphic } from "../../components/Graphic";
 import { PredominantSentiment } from "../../components/PredominantSentiment";
 import { useState, useEffect } from "react";
+import Select from "react-select";
+import { useLocation } from "react-router-dom";
 
 export const Dashboard = () => {
   const [data, setData] = useState(null);
+  const [data2, setData2] = useState<Project | null>(null);
+
 
   useEffect(() => {
     fetch("http://localhost:8080/api/sentimentos/mockGrafico", {
@@ -47,6 +51,46 @@ export const Dashboard = () => {
     dominantPercentage
   );
 
+  interface Project {
+    id: number;
+    nomeProjeto: string;
+    objetivo_projeto: string;
+    num_participantes: number;
+    analistas: string[];
+    tarefas: string[];
+  }
+
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  const userInfo = window.localStorage.getItem("userInfo");
+  const userEmail = userInfo ? JSON.parse(userInfo).email : "";
+
+  const location = useLocation();
+  const { projectData, projectId } = location.state || {};
+
+  console.log("Location state:", location.state);
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/sentimentos/getProject/${projectId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((receivedData) => {
+        console.log("Data2:", receivedData);
+        setData2(receivedData);
+        console.log("projectTasks:", receivedData.tarefas);
+      })
+      .catch((error) => {
+        console.error("Erro ao obter dados:", error);
+      });
+  }, [userEmail]);
+
+  console.log("Data2:", data2);
+  console.log("Tarefas:", data2 && data2.tarefas);
+
   return (
     <S.Wrapper>
       <S.SidebarContainer>
@@ -54,6 +98,18 @@ export const Dashboard = () => {
         <HeaderDashboard />
       </S.SidebarContainer>
       <S.ContentContainer>
+        <Select
+          options={
+            data2 && data2.tarefas
+              ? data2.tarefas.map((task, index) => ({
+                  value: index,
+                  label: task,
+                }))
+              : []
+          }
+          placeholder="Selecione uma tarefa"
+        />
+
         <S.ContainerInfo>
           <PredominantSentiment
             emotion={dominantEmotion}
