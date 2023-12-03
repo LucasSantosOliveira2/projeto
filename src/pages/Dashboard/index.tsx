@@ -3,6 +3,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { Graphic } from "../../components/Graphic";
 import { PredominantSentiment } from "../../components/PredominantSentiment";
+import { CloudWord } from "../../components/CloudWord";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
@@ -60,13 +61,14 @@ export const Dashboard = () => {
     tarefas: string[];
   }
 
-  const [projects, setProjects] = useState<Project[]>([]);
 
   const userInfo = window.localStorage.getItem("userInfo");
   const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
   const location = useLocation();
   const { projectData, projectId } = location.state || {};
+
+  console.log(projectData)
 
   console.log("Location state:", location.state);
 
@@ -86,7 +88,7 @@ export const Dashboard = () => {
       .catch((error) => {
         console.error("Erro ao obter dados:", error);
       });
-  }, [userEmail]);
+  }, [projectId, userEmail]);
 
   console.log("Data2:", data2);
   console.log("Tarefas:", data2 && data2.tarefas);
@@ -102,9 +104,9 @@ export const Dashboard = () => {
           options={
             data2 && data2.tarefas
               ? data2.tarefas.map((task, index) => ({
-                  value: index,
-                  label: task,
-                }))
+                value: index,
+                label: task,
+              }))
               : []
           }
           placeholder="Selecione uma tarefa"
@@ -119,9 +121,7 @@ export const Dashboard = () => {
             <S.Title>Polaridade</S.Title>
           </S.GraphicWrapper>
         </S.ContainerInfo>
-        <S.GraphicWrapper2>
-          <S.Title>Nuvem de Palavras</S.Title>
-        </S.GraphicWrapper2>
+        <CloudWord />
         <Graphic />
 
       </S.ContentContainer>
