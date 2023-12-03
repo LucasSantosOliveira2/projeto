@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,14 +39,10 @@ const SchemaForm = z.object({
   }),
 });
 
-
 function ProjectForm(props: ProjectFormProps) {
 
   const location = useLocation();
   const projectData = location.state?.projectData;
-  // console.log("Json: ");
-  // console.log(projectData);
-  // console.log("Id do projeto no banco: " + projectData.id);
 
   const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
@@ -72,8 +68,8 @@ function ProjectForm(props: ProjectFormProps) {
     }
   });
 
-  const [analystNames, setAnalystNames] = useState(['']);
-  const [tasksNames, setTasksNames] = useState(['']);
+  const [analystNames, setAnalystNames] = useState(projectData?.analistas || ['']);
+  const [tasksNames, setTasksNames] = useState(projectData?.tarefas || ['']);
   const [numTasks, setNumTasks] = useState(0);
 
   const addAnalyst = () => {
