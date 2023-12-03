@@ -22,7 +22,7 @@ const SchemaForm = z.object({
         participantAnalysis: z.record(z.string().min(1, 'Informe sua opinião')),
     }),
     option: z.object({
-        setenca: z.boolean(),
+        sentenca: z.boolean(),
     }),
 });
 
@@ -50,7 +50,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                 participantAnalysis: {},
             },
             option: {
-                setenca: false,
+                sentenca: false,
             }
         },
     });
@@ -126,7 +126,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         {errors.description?.participantAnalysis?.[index]?.message && (
                             <S.Error>{errors.description?.participantAnalysis?.[index]?.message}</S.Error>
                         )}
-                        <Checkbox checkboxType="option.setenca" checkboxName="Setença" register={register} />                    </S.FieldContainer>
+                        <Checkbox checkboxType="option.sentenca" checkboxName="Sentença" register={register} />                    </S.FieldContainer>
                 ))}
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>

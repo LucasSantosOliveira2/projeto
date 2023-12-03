@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 type ProjectFormProps = {
   switchToSecondForm: (numParticipants: number, tasksNames: string[]) => void;
   onSave: (data: FormProps) => void;
+  title: string;
 }
 
 
@@ -153,7 +154,7 @@ function ProjectForm(props: ProjectFormProps) {
   return (
     <S.Form >
       <S.FormContainer>
-        <S.Title>Informações do projeto</S.Title>
+        <S.Title>{props.title}</S.Title>
         <S.FieldContainer>
           <S.Label>Nome do Projeto<S.Required>*</S.Required></S.Label>
           <S.Input

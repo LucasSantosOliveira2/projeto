@@ -46,7 +46,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
             });
 
             response.json().then(data => 
-                navigate('/forms', { 
+                navigate('/formsEdit', { 
                     state: { projectData: data }
                 })
             );

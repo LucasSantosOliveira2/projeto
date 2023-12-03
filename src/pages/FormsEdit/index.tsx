@@ -27,7 +27,7 @@ type ProjectFormDataState = {
 
 
 
-export const Forms = () => {
+export const FormsEdit = () => {
     const [currentForm, setCurrentForm] = useState('project');
     const [numParticipants, setNumParticipants] = useState(0);
     const [tasksNames, setTasksNames] = useState<string[]>([]);
@@ -55,7 +55,7 @@ export const Forms = () => {
 
             <S.ContentContainer>
                 {currentForm === 'project' ? (
-                    <ProjectForm switchToSecondForm={switchToSecondForm} onSave={setProjectFormData} title='Criar Projeto' />
+                    <ProjectForm switchToSecondForm={switchToSecondForm} onSave={setProjectFormData} title='Editar Projeto' />
                 ) : currentForm === 'second' && currentTaskIndex < numTasks ? (
                     <SecondForm
                         key={currentTaskIndex}
