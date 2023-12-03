@@ -43,7 +43,10 @@ function ProjectForm(props: ProjectFormProps) {
 
   const location = useLocation();
   const projectData = location.state?.projectData;
-  console.log(projectData);
+  
+  if (!projectData) {
+    window.location.href = '/project';
+  }  
 
   const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
