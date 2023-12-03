@@ -56,52 +56,51 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
     });
 
     const handleFormSubmit = async (data: SecondFormValues) => {
-        console.log(data)
+        console.log(data);
         try {
             await new Promise((resolve) => setTimeout(resolve, 10));
             dataArray.push({
                 secondForm: data,
                 projectFormData: props.projectFormData,
             });
-
+    
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
-
                 console.log(JSON.stringify({
                     dataArray: dataArray,
                     email: userEmail,
                 }));
-
-                toast.info('✅ Carregando', {
+    
+                toast.info('⏳ Analisando...', {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: false,
                     hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
                     progress: undefined,
                     theme: "colored",
                     style: {
                         background: '#7551FF',
                         color: '#ffffff',
                     },
-                })
-
-                fetch('http://localhost:8080/project/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
+                    onClose: () => { 
+                        fetch('http://localhost:8080/project/create', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                dataArray: dataArray,
+                                email: userEmail,
+                            }),
+                        }).then(() => {
+                            navigate("/project");
+                            window.location.reload();
+                        }).catch(error => {
+                            console.log(error);
+                        });
                     },
-                    body: JSON.stringify({
-                        dataArray: dataArray,
-                        email: userEmail,
-                    }),
-                }).then(() => {
-                    navigate("/project");
-                    window.location.reload();
-                }).catch(error => {
-                    console.log(error);
                 });
-
             } else {
                 props.switchToNextForm();
             }
@@ -109,6 +108,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
             console.error("Erro ao enviar o formulário:", error);
         }
     };
+    
 
     return (
         <S.Form onSubmit={handleSubmit(handleFormSubmit)}>

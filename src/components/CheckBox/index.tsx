@@ -5,6 +5,7 @@ type CheckboxProps = {
     checkboxName: string,
     checkboxType?: string,
     register?: any,
+    checked?: boolean,
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 
 }
@@ -12,7 +13,7 @@ type CheckboxProps = {
 const optionsDisabled = ['Voz', 'Mousetrack', 'Video'];
 
 
-export const Checkbox = ({ checkboxType, checkboxName, register, onChange }: CheckboxProps) => {
+export const Checkbox = ({ checkboxType, checkboxName, register, checked, onChange }: CheckboxProps) => {
     const isOptionDisabled = optionsDisabled.includes(checkboxName);
 
     return (
@@ -26,7 +27,7 @@ export const Checkbox = ({ checkboxType, checkboxName, register, onChange }: Che
                     }
                 }}
                 disabled={isOptionDisabled}
-
+                checked={checked}
             />
             {checkboxName}
         </S.Label>

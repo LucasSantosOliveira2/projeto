@@ -43,6 +43,7 @@ function ProjectForm(props: ProjectFormProps) {
 
   const location = useLocation();
   const projectData = location.state?.projectData;
+  console.log(projectData);
 
   const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
@@ -112,12 +113,12 @@ function ProjectForm(props: ProjectFormProps) {
 
   const [typeState, setTypeState] = useState({
     video: false,
-    texto: false,
+    texto: projectData? true : false,
     voz: false,
     mousetrack: false,
-    ironia: false,
-    polaridade: false,
-    sentimento: false,
+    ironia: projectData?.isIronic,
+    polaridade: projectData?.isPolarity,
+    sentimento: projectData?.isSentiment,
   });
 
   const handleTypeCheckboxChange = (type: keyof typeof typeState) => {
@@ -132,8 +133,6 @@ function ProjectForm(props: ProjectFormProps) {
     trigger().then((isValid) => {
       if (isValid) {
         const formData = getValues();
-
-        console.log(formData);
 
         props.onSave(formData);
 
@@ -255,6 +254,7 @@ function ProjectForm(props: ProjectFormProps) {
               checkboxName='Texto'
               register={register}
               onChange={() => handleTypeCheckboxChange('texto')}
+              checked={typeState.texto}
             />
             {typeState.texto && (
               <S.CheckboxContainer>
@@ -263,18 +263,21 @@ function ProjectForm(props: ProjectFormProps) {
                   checkboxType="type.ironia"
                   register={register}
                   onChange={() => handleTypeCheckboxChange('ironia')}
+                  checked={typeState.ironia}
                 />
                 <Checkbox
                   checkboxName="Polaridade"
                   checkboxType="type.polaridade"
                   register={register}
                   onChange={() => handleTypeCheckboxChange('polaridade')}
+                  checked={typeState.polaridade}
                 />
                 <Checkbox
                   checkboxName="Sentimentos"
                   checkboxType="type.sentimento"
                   register={register}
                   onChange={() => handleTypeCheckboxChange('sentimento')}
+                  checked={typeState.sentimento}
                 />
               </S.CheckboxContainer>
             )}
