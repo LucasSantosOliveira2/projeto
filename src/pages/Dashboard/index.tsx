@@ -26,9 +26,9 @@ export const Dashboard = () => {
 
   const formattedData: [string, number][] = data
     ? Object.entries(data).map(([emoção, porcentagem]) => [
-        emoção,
-        Number(porcentagem),
-      ])
+      emoção,
+      Number(porcentagem),
+    ])
     : [];
 
   const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
@@ -59,16 +59,15 @@ export const Dashboard = () => {
             emotion={dominantEmotion}
             percentage={dominantPercentage}
           />
-          <Graphic />
-        </S.ContainerInfo>
-        <S.ContainerInfo>
           <S.GraphicWrapper>
             <S.Title>Polaridade</S.Title>
           </S.GraphicWrapper>
-          <S.GraphicWrapper2>
-            <S.Title>Nuvem de Palavras</S.Title>
-          </S.GraphicWrapper2>
         </S.ContainerInfo>
+        <S.GraphicWrapper2>
+          <S.Title>Nuvem de Palavras</S.Title>
+        </S.GraphicWrapper2>
+        <Graphic />
+
       </S.ContentContainer>
     </S.Wrapper>
   );
