@@ -61,7 +61,9 @@ export const PredominantSentiment = ({ emotion, percentage }: SentimentProps) =>
 
     return (
         <S.Wrapper>
-            <S.Title>Sentimento Predominante</S.Title>
+            <S.Title>
+                Sentimento Predominante
+            </S.Title>
             <S.ContainerContent>
                 <S.Emoji style={{ backgroundImage: `url(${emotionImage})` }}></S.Emoji>
                 <S.Emotion>{emotionName} <span>{percentageFinal}%</span></S.Emotion>
