@@ -6,8 +6,6 @@ import { FormProps, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 type SecondFormProps = {
     switchToProjectForm: () => void;
     numParticipants: number;
@@ -29,13 +27,10 @@ export type SecondFormValues = z.infer<typeof SchemaForm>;
 
 interface CombinedFormData {
     secondForm: SecondFormValues;
-    projectFormData: FormProps;/*tirei o any */
+    projectFormData: FormProps;
 }
 
 const dataArray: CombinedFormData[] = [];
-
-const userInfo = window.localStorage.getItem('userInfo');
-const userEmail = userInfo ? JSON.parse(userInfo).email : '';
 
 export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps }) => {
     const navigate = useNavigate();
@@ -66,6 +61,10 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
 
             const projectForm = props.projectFormData;
             const idProjeto = (projectForm as any).information.id;
+
+            const userInfoString = window.localStorage.getItem('userInfo');
+
+            const userEmail = userInfoString !== null ? JSON.parse(userInfoString).email : null;
 
             if (props.currentTaskIndex === props.tasksNames.length - 1) {
 
@@ -98,6 +97,7 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                             color: '#ffffff',
                         },
                     });
+
                     fetch('http://localhost:8080/project/create', {
                         method: 'POST',
                         headers: {
@@ -113,6 +113,8 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     }).catch(error => {
                         console.log(error);
                     });
+
+
                 } else {
                     toast.info('⏳ Atualizando e Analisando...', {
                         position: "top-right",
