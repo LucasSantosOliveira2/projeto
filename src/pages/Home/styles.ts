@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom';
 
 
 export const Wrapper = styled.section`
@@ -142,4 +143,9 @@ export const TitleCard = styled.h1`
     line-height: 2rem;
     color: white;
 
+`
+export const StyledLink = styled(Link)`
+  text-decoration: none; 
+  color: inherit;
+  width: 100%;
 `

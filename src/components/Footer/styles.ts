@@ -8,11 +8,12 @@ export const Wrapper = styled.footer`
     background-color: #111C44;
     padding: 15px 24px;
     justify-content: space-around;
+    gap: 20px;
     @media screen and (min-width: 768px) {
         flex-direction: row;
         padding: 30px 100px;
         align-items: flex-start;
-
+        gap: 0px;
     }
 `
 export const BottomBar = styled.div`

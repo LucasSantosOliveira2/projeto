@@ -13,11 +13,11 @@ import MouseTrack from "../../assets/Images/mousetrack.png"
 export const Home = () => {
 
     const handleScroll = () => {
-        const aboutSection = document.getElementById("aboutSection");
-        if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: "smooth" });
+        const analiseCardsAnchor = document.getElementById("aboutSection");
+        if (analiseCardsAnchor) {
+            analiseCardsAnchor.scrollIntoView({ behavior: "smooth" });
         }
-      };
+    };
 
     return (
         <>
