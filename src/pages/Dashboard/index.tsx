@@ -23,14 +23,6 @@ export const Dashboard = () => {
 
   const [word, setWord] = useState<string[]>([]);
   const [times, setTimes] = useState<number[]>([]);
-
-  const [selectedValue, setSelectedValue] = useState({
-    value: 0,
-    label: data2 && data2.tarefas && data2.tarefas.length > 0
-      ? data2.tarefas[0].nome
-      : "Selecione uma tarefa",
-  });
-
   const [selectedOption, setSelectedOption] = useState<any>("Geral");
 
   interface Project {
@@ -95,7 +87,6 @@ export const Dashboard = () => {
 
 
   const handleChange = (selectedOption: any) => {
-    setSelectedValue(selectedOption.value);
     setSelectedOption(selectedOption);
 
     const porcentagensEmotion = data2?.tarefas[selectedOption.value].analiseSentimento;

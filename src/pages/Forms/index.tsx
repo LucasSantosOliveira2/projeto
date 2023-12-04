@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import * as S from './styles';
 import { Sidebar } from '../../components/Sidebar';
-import ProjectForm, { FormProps } from '../../components/ProjectForm';
+import ProjectForm from '../../components/ProjectForm';
 import { SecondForm } from '../../components/SecondForm';
 
 
@@ -64,7 +64,7 @@ export const Forms = () => {
                         tasksNames={tasksNames}
                         currentTaskIndex={currentTaskIndex}
                         switchToNextForm={() => setCurrentTaskIndex(currentTaskIndex + 1)}
-                        projectFormData={projectFormData}
+                        projectFormData={projectFormData as any}
                     />
                 ) : null}
             </S.ContentContainer>

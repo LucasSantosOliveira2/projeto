@@ -1,9 +1,5 @@
 import * as S from "./styles";
 import { Logo } from "../Logo";
-import { FacebookIcon } from "../Images/FacebookIcon";
-import { TwitterIcon } from "../Images/TwitterIcon";
-import { LinkedinIcon } from "../Images/LinkedinIcon";
-import { InstagramIcon } from "../Images/InstagramIcon";
 
 export const Footer = () => {
     return (

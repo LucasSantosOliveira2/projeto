@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProps, useNavigate } from "react-router-dom";
-import { Checkbox } from "../CheckBox";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -38,7 +37,7 @@ const dataArray: CombinedFormData[] = [];
 const userInfo = window.localStorage.getItem('userInfo');
 const userEmail = userInfo ? JSON.parse(userInfo).email : '';
 
-export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps })/*tire o any */ => {
+export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps }) => {
     const navigate = useNavigate();
 
     const { handleSubmit, register, formState: { errors } } = useForm<SecondFormValues>({

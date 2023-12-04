@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Chart } from "react-google-charts";
 import * as S from "./styles";
 
@@ -7,8 +6,7 @@ type SentimentProps = {
   percentage: number[];
 }
 
-export function Graphic({ emotion, percentage }: SentimentProps) {
-  const [chartData, setChartData] = useState(null);
+export function Graphic({ percentage }: SentimentProps) {
 
   const options = {
     backgroundColor: "#111C44",
