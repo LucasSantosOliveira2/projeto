@@ -13,6 +13,7 @@ type SentimentProps = {
 }
 
 export const PredominantSentiment = ({ emotion, percentage }: SentimentProps) => {
+
     const getEmotionImage = (emotion: string) => {
         switch (emotion.toLowerCase()) {
             case "alegria":
@@ -56,8 +57,9 @@ export const PredominantSentiment = ({ emotion, percentage }: SentimentProps) =>
     }
 
     const emotionImage = getEmotionImage(emotion);
+    
     const emotionName = getEmotionName(emotion);
-    const percentageFinal = percentage * 100;
+    const percentageFinal = (percentage * 100).toFixed(2);
 
     return (
         <S.Wrapper>

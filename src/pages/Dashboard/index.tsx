@@ -7,58 +7,55 @@ import { CloudWord } from "../../components/CloudWord";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useLocation } from "react-router-dom";
+import { Polarity } from "../../components/Polarity";
 
 export const Dashboard = () => {
-  const [data, setData] = useState(null);
+
   const [data2, setData2] = useState<Project | null>(null);
+  const [dominantEmotion, setDominantEmotion] = useState<any>("outros");
+  const [dominantPercentageEmotion, setDominantPercentageEmotion] = useState<any>(0);
 
+  const [emotions, setEmotions] = useState<string[]>([]);
+  const [percentageEmotions, setPercentageEmotions] = useState<number[]>([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/sentimentos/mockGrafico", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.error("Erro ao obter dados:", error);
-      });
-  }, []);
+  const [polarity, setPolarity] = useState<any>("neu");
+  const [percentagePolarity, sePercentagePolarity] = useState<any>(0);
 
-  const formattedData: [string, number][] = data
-    ? Object.entries(data).map(([emoção, porcentagem]) => [
-      emoção,
-      Number(porcentagem),
-    ])
-    : [];
+  const [selectedValue, setSelectedValue] = useState({
+    value: 0,
+    label: data2 && data2.tarefas && data2.tarefas.length > 0
+      ? data2.tarefas[0].nome
+      : "Selecione uma tarefa",
+  });
 
-  const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
-
-  console.log(combinedData);
-  const mostDominantEmotion: [string, number] = formattedData.reduce(
-    (prev: [string, number], current: [string, number]) =>
-      prev[1] > current[1] ? prev : current,
-    ["", 0]
-  );
-
-  const [dominantEmotion, dominantPercentage] = mostDominantEmotion;
-  console.log(
-    "Resultado da emoção dominante",
-    dominantEmotion,
-    dominantPercentage
-  );
+  const [selectedOption, setSelectedOption] = useState<any>("Geral");
 
   interface Project {
-    id: number;
     nomeProjeto: string;
-    objetivo_projeto: string;
-    num_participantes: number;
-    analistas: string[];
-    tarefas: string[];
+    tarefas: {
+      nome: string;
+      analiseIronia: {
+        output: string;
+        porcentagemIronia: number;
+        porcentagemNaoIronia: number;
+      },
+      analisePolaridade: {
+        output: string;
+        positivo: number;
+        negativo: number;
+        neutro: number;
+      },
+      analiseSentimento: {
+        output: string;
+        alegria: number;
+        medo: number;
+        nojo: number;
+        outros: number;
+        raiva: number;
+        surpresa: number;
+        tristeza: number;
+      }
+    }[];
   }
 
 
@@ -66,14 +63,10 @@ export const Dashboard = () => {
   const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
   const location = useLocation();
-  const { projectData, projectId } = location.state || {};
-
-  console.log(projectData)
-
-  console.log("Location state:", location.state);
+  const { projectId } = location.state || {};
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/sentimentos/getProject/${projectId}`, {
+    fetch(`http://localhost:8080/api/sentimentos/getProjectAnalises/${projectId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -81,17 +74,89 @@ export const Dashboard = () => {
     })
       .then((response) => response.json())
       .then((receivedData) => {
-        console.log("Data2:", receivedData);
         setData2(receivedData);
-        console.log("projectTasks:", receivedData.tarefas);
+        setSelectedOption({
+          value: 0,
+          label: receivedData.tarefas[0].nome,
+        });
+
       })
       .catch((error) => {
         console.error("Erro ao obter dados:", error);
       });
   }, [projectId, userEmail]);
 
-  console.log("Data2:", data2);
-  console.log("Tarefas:", data2 && data2.tarefas);
+
+  const handleChange = (selectedOption: any) => {
+    setSelectedValue(selectedOption.value);
+    setDominantEmotion(data2?.tarefas[selectedOption.value].analiseSentimento.output);
+    setPolarity(data2?.tarefas[selectedOption.value].analisePolaridade.output);
+    setSelectedOption(selectedOption);
+
+    const porcentagensEmotion = data2?.tarefas[selectedOption.value].analiseSentimento;
+    const porcentagensPolarity = data2?.tarefas[selectedOption.value].analisePolaridade;
+
+
+    if (porcentagensPolarity) {
+      const { positivo, negativo, neutro } = porcentagensPolarity;
+
+      const maiorPorcentagem = Math.max(
+        positivo,
+        negativo,
+        neutro
+      );
+
+      sePercentagePolarity(maiorPorcentagem);
+    }
+
+
+    if (porcentagensEmotion) {
+      const {
+        alegria,
+        medo,
+        nojo,
+        outros,
+        raiva,
+        surpresa,
+        tristeza,
+      } = porcentagensEmotion;
+
+      const maiorPorcentagem = Math.max(
+        alegria,
+        medo,
+        nojo,
+        outros,
+        raiva,
+        surpresa,
+        tristeza
+      );
+
+      setEmotions([
+        "Alegria",
+        "Medo",
+        "Nojo",
+        "Outros",
+        "Raiva",
+        "Surpresa",
+        "Tristeza",
+      ]);
+
+      setPercentageEmotions([
+        alegria,
+        medo,
+        nojo,
+        outros,
+        raiva,
+        surpresa,
+        tristeza,
+      ]);
+
+      setDominantPercentageEmotion(maiorPorcentagem);
+    }
+  };
+
+
+
 
   return (
     <S.Wrapper>
@@ -100,31 +165,70 @@ export const Dashboard = () => {
         <HeaderDashboard />
       </S.SidebarContainer>
       <S.ContentContainer>
-        <Select
-          options={
-            data2 && data2.tarefas
-              ? data2.tarefas.map((task, index) => ({
-                value: index,
-                label: task,
-              }))
-              : []
-          }
-          placeholder="Selecione uma tarefa"
-        />
+        <S.CustomSelect>
+          <S.Title>Tarefas</S.Title>
+          <Select
+            options={
+              data2 && data2.tarefas
+                ? data2.tarefas.map((task, index) => ({
+                  value: index,
+                  label: task.nome,
+                }))
+                : []
+            }
+            defaultValue={selectedOption}
+            onChange={handleChange}
+            placeholder="Selecione uma tarefa"
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                direction: "ltr",
+                borderColor: state.isFocused ? '#7551FF' : '#1f0099',
+                backgroundColor: '#111C44',
+                color: 'white',
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                backgroundColor: '#111C44',
+                color: 'white',
+              }),
+              option: (baseStyles, state) => ({
+                ...baseStyles,
+                backgroundColor: state.isFocused ? '#7551FF' : '#111C44',
+                color: 'white',
+              }),
+              singleValue: (baseStyles) => ({
+                ...baseStyles,
+                color: 'white',
+              }),
+              placeholder: (baseStyles) => ({
+                ...baseStyles,
+                color: 'white',
+              }),
+
+            }}
+
+          />
+        </S.CustomSelect>
 
         <S.ContainerInfo>
           <PredominantSentiment
             emotion={dominantEmotion}
-            percentage={dominantPercentage}
+            percentage={dominantPercentageEmotion}
           />
-          <S.GraphicWrapper>
-            <S.Title>Polaridade</S.Title>
-          </S.GraphicWrapper>
+          <Polarity
+            polarity={polarity}
+            percentage={percentagePolarity}
+          />
         </S.ContainerInfo>
         <CloudWord />
-        <Graphic />
+        <Graphic
+          emotion={emotions}
+          percentage={percentageEmotions}
+        />
 
       </S.ContentContainer>
     </S.Wrapper>
   );
+
 };

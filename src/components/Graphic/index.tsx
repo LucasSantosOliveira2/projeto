@@ -1,25 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Chart } from "react-google-charts";
 import * as S from "./styles";
 
-export function Graphic() {
-  const [chartData, setChartData] = useState(null);
+type SentimentProps = {
+  emotion: string[];
+  percentage: number[];
+}
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/sentimentos/mockGrafico', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setChartData(data);
-      })
-      .catch(error => {
-        console.error('Erro ao obter dados:', error);
-      });
-  }, []);
+export function Graphic({ emotion, percentage }: SentimentProps) {
+  const [chartData, setChartData] = useState(null);
 
   const options = {
     backgroundColor: "#111C44",
@@ -35,9 +24,20 @@ export function Graphic() {
     },
   };
 
-  const formattedData = chartData
-    ? Object.entries(chartData).map(([emoção, porcentagem]) => [emoção, porcentagem])
-    : [];
+  console.log('emotion: ' + emotion)
+  console.log('percentage a: ' + percentage)
+
+  const formattedData = [
+    ["Alegria", percentage[0]],
+    ["Medo", percentage[1]],
+    ["Nojo", percentage[2]],
+    ["Outros", percentage[3]],
+    ["Raiva", percentage[4]],
+    ["Surpresa", percentage[5]],
+    ["Tristeza", percentage[6]],
+  ];
+
+  console.log('formattedData: ' + formattedData)
 
   const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
 
@@ -50,47 +50,7 @@ export function Graphic() {
         options={options}
         width="100%"
         height="100%"
-
       />
-
-      {/* <GaugeComponent
-        arc={{
-          subArcs: [
-            {
-              limit: 20,
-              color: '#EA4228',
-              showTick: true
-            },
-            {
-              limit: 40,
-              color: '#F58B19',
-              showTick: true
-            },
-            {
-              limit: 60,
-              color: '#F5CD19',
-              showTick: true
-            },
-            {
-              limit: 80,
-              color: '#5BE12C',
-              showTick: true
-            },
-            {
-              limit: 100,
-              color: '#2CC990',
-              showTick: true
-            },
-          ]
-        }}
-        style={
-          {
-            width: 400,
-            height: 320,
-          }
-        }
-        value={20}
-      /> */}
     </S.Wrapper>
   );
 }

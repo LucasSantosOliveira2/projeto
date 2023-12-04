@@ -238,10 +238,6 @@ function ProjectForm(props: ProjectFormProps) {
               {errors.information?.tasksName && (
                 <S.Error>{errors.information.tasksName[index]?.message}</S.Error>
               )}
-
-              {errors.information?.tasksName?.message && errors.information.tasksName.message === 'Os nomes das tarefas devem ser únicos' && (
-                <S.Error>Os nomes das tarefas devem ser únicos</S.Error>
-              )}
             </S.FieldContainer>
           ))}
 
