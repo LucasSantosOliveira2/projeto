@@ -10,7 +10,7 @@ type CheckboxProps = {
 
 }
 
-const optionsDisabled = ['Voz', 'Mousetrack', 'Video'];
+const optionsDisabled = ['Voz', 'Mousetrack', 'Video', 'Ironia'];
 
 
 export const Checkbox = ({ checkboxType, checkboxName, register, checked, onChange }: CheckboxProps) => {

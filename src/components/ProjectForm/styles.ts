@@ -120,9 +120,10 @@ export const StyledLink = styled(Link)`
 export const TaskContainer = styled(AnalitcsContainer)`
 `
 export const Error = styled.p`
- font-size: 0.875rem;
- color: white;
- font-weight: 500;
+  font-size: 0.875rem;
+  color: white;
+  font-weight: 500;
+  background-color: #ff4d4d;
 `
 export const InputNumber = styled.input`
   max-width: 80px;

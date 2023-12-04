@@ -85,6 +85,20 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                             color: '#ffffff',
                         },
                     });
+                    toast.info('Você será redirecionado para a página de projetos em breve...', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        style: {
+                            background: '#7551FF',
+                            color: '#ffffff',
+                        },
+                    });
                     fetch('http://localhost:8080/project/create', {
                         method: 'POST',
                         headers: {
@@ -102,6 +116,20 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                     });
                 } else {
                     toast.info('⏳ Atualizando e Analisando...', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        style: {
+                            background: '#7551FF',
+                            color: '#ffffff',
+                        },
+                    });
+                    toast.info('Você será redirecionado para a página de projetos em breve...', {
                         position: "top-right",
                         autoClose: false,
                         hideProgressBar: false,
@@ -156,7 +184,8 @@ export const SecondForm = (props: SecondFormProps & { projectFormData: FormProps
                         {errors.description?.participantAnalysis?.[index]?.message && (
                             <S.Error>{errors.description?.participantAnalysis?.[index]?.message}</S.Error>
                         )}
-                        <Checkbox checkboxType="option.sentenca" checkboxName="Sentença" register={register} />                    </S.FieldContainer>
+                        {/* <Checkbox checkboxType="option.sentenca" checkboxName="Sentença" register={register} />                     */}
+                    </S.FieldContainer>
                 ))}
                 <S.ButtonContainer>
                     <S.ButtonSave onClick={props.switchToProjectForm}>Voltar</S.ButtonSave>

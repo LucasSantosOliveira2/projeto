@@ -13,14 +13,12 @@ export const Profile = () => {
 
     useEffect(() => {
         const storedUserInfo = window.localStorage.getItem("userInfo");
-        //console.log('ok');
 
         if (storedUserInfo) {
             const userInfo = JSON.parse(storedUserInfo);
 
             if (JSON.stringify(userInfo) !== JSON.stringify(userData)) {
                 setUser(userInfo);
-                console.log(userInfo);
             }
         }
     }, [setUser, userData]);

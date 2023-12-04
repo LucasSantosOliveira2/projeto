@@ -21,6 +21,9 @@ export const Dashboard = () => {
   const [polarity, setPolarity] = useState<any>("neu");
   const [percentagePolarity, sePercentagePolarity] = useState<any>(0);
 
+  const [word, setWord] = useState<string[]>([]);
+  const [times, setTimes] = useState<number[]>([]);
+
   const [selectedValue, setSelectedValue] = useState({
     value: 0,
     label: data2 && data2.tarefas && data2.tarefas.length > 0
@@ -54,6 +57,10 @@ export const Dashboard = () => {
         raiva: number;
         surpresa: number;
         tristeza: number;
+      },
+      contagemPalavras: {
+        palavra: string[],
+        contagemPalavra: number[]
       }
     }[];
   }
@@ -89,13 +96,16 @@ export const Dashboard = () => {
 
   const handleChange = (selectedOption: any) => {
     setSelectedValue(selectedOption.value);
-    setDominantEmotion(data2?.tarefas[selectedOption.value].analiseSentimento.output);
-    setPolarity(data2?.tarefas[selectedOption.value].analisePolaridade.output);
     setSelectedOption(selectedOption);
 
     const porcentagensEmotion = data2?.tarefas[selectedOption.value].analiseSentimento;
     const porcentagensPolarity = data2?.tarefas[selectedOption.value].analisePolaridade;
 
+    const word = data2?.tarefas[selectedOption.value].contagemPalavras.palavra;
+    setWord(word ? word : []);
+
+    const times = data2?.tarefas[selectedOption.value].contagemPalavras.contagemPalavra;
+    setTimes(times ? times : []);
 
     if (porcentagensPolarity) {
       const { positivo, negativo, neutro } = porcentagensPolarity;
@@ -106,6 +116,7 @@ export const Dashboard = () => {
         neutro
       );
 
+      setPolarity(data2?.tarefas[selectedOption.value].analisePolaridade?.output);
       sePercentagePolarity(maiorPorcentagem);
     }
 
@@ -151,6 +162,7 @@ export const Dashboard = () => {
         tristeza,
       ]);
 
+      setDominantEmotion(data2?.tarefas[selectedOption.value].analiseSentimento?.output);
       setDominantPercentageEmotion(maiorPorcentagem);
     }
   };
@@ -221,7 +233,10 @@ export const Dashboard = () => {
             percentage={percentagePolarity}
           />
         </S.ContainerInfo>
-        <CloudWord />
+        <CloudWord 
+          word={word}
+          times={times}
+        />
         <Graphic
           emotion={emotions}
           percentage={percentageEmotions}

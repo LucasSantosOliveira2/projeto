@@ -10,7 +10,6 @@ type PolarityProps = {
 
 export const Polarity = ({ polarity, percentage }: PolarityProps) => {
 
-    console.log("polarity: " + polarity)
 
     const getPolarityImage = (polarity: string) => {
         switch (polarity.toLowerCase()) {
@@ -41,8 +40,6 @@ export const Polarity = ({ polarity, percentage }: PolarityProps) => {
     const polarityImage = getPolarityImage(polarity);
     
     const polarityName = getPolarityName(polarity);
-
-    console.log("polarityName: " + polarityName)
 
     const percentageFinal = (percentage * 100).toFixed(2);
 
