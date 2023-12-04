@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import AlegriaImage from "../../assets/Images/Alegria.png";
 import OutrosImage from "../../assets/Images/Outros.png";
-import RaivaImage from "../../assets/Images/Raiva.png";
+import TristezaImage from "../../assets/Images/Tristeza.png";
 
 type PolarityProps = {
     polarity: string;
@@ -18,7 +18,7 @@ export const Polarity = ({ polarity, percentage }: PolarityProps) => {
             case "neu":
                 return OutrosImage;
             case "neg":
-                return RaivaImage;
+                return TristezaImage;
             default:
                 return null;
         }
@@ -38,7 +38,7 @@ export const Polarity = ({ polarity, percentage }: PolarityProps) => {
     }
 
     const polarityImage = getPolarityImage(polarity);
-    
+
     const polarityName = getPolarityName(polarity);
 
     const percentageFinal = (percentage * 100).toFixed(2);

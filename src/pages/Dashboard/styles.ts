@@ -73,7 +73,7 @@ export const ContainerInfo = styled.div`
 `
 export const CustomSelect = styled.div`
   width: 300px;
-  margin-right: 70%;
+  margin-right: 68%;
   margin-top: 0.2%;
   z-index: 2;
 `;

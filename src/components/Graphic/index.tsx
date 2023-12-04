@@ -7,7 +7,6 @@ type SentimentProps = {
 }
 
 export function Graphic({ percentage }: SentimentProps) {
-
   const options = {
     backgroundColor: "#111C44",
     titleTextStyle: {
@@ -37,13 +36,17 @@ export function Graphic({ percentage }: SentimentProps) {
   return (
     <S.Wrapper>
       <S.Title>Grafico de Sentimentos</S.Title>
-      <Chart
-        chartType="PieChart"
-        data={combinedData}
-        options={options}
-        width="100%"
-        height="100%"
-      />
+      {percentage && percentage.length > 0 ? (
+        <Chart
+          chartType="PieChart"
+          data={combinedData}
+          options={options}
+          width="100%"
+          height="100%"
+        />
+      ) : (
+        <S.Message>Não existem dados para exibir no momento.</S.Message>
+      )}
     </S.Wrapper>
   );
 }
