@@ -49,7 +49,7 @@ function ProjectForm(props: ProjectFormProps) {
 
   const location = useLocation();
   const projectData = location.state?.projectData;
-  
+
   const { register, formState: { errors }, trigger, getValues, setValue } = useForm<FormProps>({
     criteriaMode: 'all',
     mode: 'all',
@@ -119,7 +119,7 @@ function ProjectForm(props: ProjectFormProps) {
 
   const [typeState, setTypeState] = useState({
     video: false,
-    texto: projectData? true : false,
+    texto: projectData ? true : false,
     voz: false,
     mousetrack: false,
     ironia: projectData?.isIronic,
@@ -150,8 +150,9 @@ function ProjectForm(props: ProjectFormProps) {
     });
   }
 
+  //console.log('Erro de validação das tarefas:', errors);
 
-  
+
   return (
     <S.Form >
       <S.FormContainer>
@@ -181,7 +182,7 @@ function ProjectForm(props: ProjectFormProps) {
 
         <S.FieldContainer>
           <S.Label>Analistas do projeto</S.Label>
-          {analystNames.map((analyst, index) => (
+          {analystNames.map((analyst: string, index: number) => (
             <S.FieldContainer key={index}>
               <S.Label>Analista {index + 1}<S.Required>*</S.Required>:</S.Label>
               <S.AnalitcsContainer>
@@ -221,7 +222,7 @@ function ProjectForm(props: ProjectFormProps) {
 
         <S.FieldContainer >
           <S.Label>Tarefas</S.Label>
-          {tasksNames.map((task, index) => (
+          {tasksNames.map((task: string, index: number) => (
             <S.FieldContainer key={index}>
               <S.Label>Tarefa {index + 1}<S.Required>*</S.Required>:</S.Label>
               <S.TaskContainer>
@@ -238,8 +239,12 @@ function ProjectForm(props: ProjectFormProps) {
               {errors.information?.tasksName && (
                 <S.Error>{errors.information.tasksName[index]?.message}</S.Error>
               )}
+              {errors.information?.tasksName && (
+                <S.Error>{errors.information.tasksName.root?.message}</S.Error>
+              )}
             </S.FieldContainer>
           ))}
+
 
           <S.ButtonAnalyst type="button" onClick={addTasks}>
             Adicionar uma nova tarefa

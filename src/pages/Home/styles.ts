@@ -47,6 +47,7 @@ export const Description = styled.p`
 export const Image = styled.img`
     max-width: 100%; 
     height: auto;
+    
 `
 export const ContainerImage = styled.div`
     width: 98.7vw;
@@ -66,25 +67,27 @@ export const ContainerImage = styled.div`
     }
 `
 export const ContainerAbout = styled.div`
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-direction: column;
-    color: ${(props) => props.theme.colors.dark};
-
-    @media screen and (min-width: 768px) {
-        flex-direction: row;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    @media screen and (max-width: 1024px) {
+        grid-template-columns: repeat(1, 1fr);
     }
 `
 export const DescriptionAbout = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 50px;
     align-items: center;
-
 `
 export const TitleAbout = styled.h1`
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     line-height: 2rem;
     color: white;
@@ -96,12 +99,15 @@ export const TitleAbout = styled.h1`
     }
 `
 export const TextAbout = styled.p`
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: 500;
     text-align: justify;
     color: white;
-    @media screen and (min-width: 768px) {
+    @media screen and (max-width: 768px) {
         font-size: 1.1rem;
+    }
+    @media screen and (min-width: 1400px) {
+        font-size: 1.5rem;
     }
 `
 export const ImageAbout = styled.div`
@@ -110,9 +116,26 @@ export const ImageAbout = styled.div`
     height: auto;
 `
 
-export const WorksContainer = styled(ContainerAbout)` 
-    gap: 10px;
-   @media screen and (min-width: 768px) {
-        flex-direction: row-reverse;
+export const ContainerCard = styled.div`
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    grid-gap:30px;
+    align-items: center;
+    justify-items: center;
+    @media screen and (min-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
     }
+    @media screen and (min-width: 1250px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+`
+
+export const TitleCard = styled.h1`
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2rem;
+    color: white;
+
 `
