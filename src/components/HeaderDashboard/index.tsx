@@ -1,6 +1,8 @@
 import * as S from "./styles";
 import { ImMenu } from "react-icons/im";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { MenuHamburguer } from "../MenuHamburguer";
 
 function mapPathToPageName(path: string) {
   switch (path) {
@@ -22,6 +24,7 @@ function mapPathToPageName(path: string) {
 export const HeaderDashboard = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const [menuIsVisible, setMenuIsVisible] = useState(false);
 
   const pageName = mapPathToPageName(currentPath);
 
@@ -29,7 +32,6 @@ export const HeaderDashboard = () => {
   const storedUserPicture = storedUserInfo
     ? JSON.parse(storedUserInfo).picture
     : null;
-
   return (
     <S.Wrapper>
       <S.Content>
@@ -42,9 +44,9 @@ export const HeaderDashboard = () => {
             <FaSearch />
             <S.Input placeholder="Busca" type="text" id="Busca" name="Busca" />
           </S.InputContainer> */}
-          <S.BurguerMenu>
-            <ImMenu />
-          </S.BurguerMenu>
+
+          <MenuHamburguer menuIsVisible={menuIsVisible} setMenuIsVisible={setMenuIsVisible} />
+          <ImMenu onClick={() => setMenuIsVisible(true)} />
           <S.StyledLink to="/profile">
             <S.ProfileImage
               style={{
