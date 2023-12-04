@@ -1,17 +1,25 @@
-import { useState, useEffect } from 'react';
 import * as S from "./styles";
-import { SidebarItem } from "../SidebarItem";
-import { BiSolidUser, BiSolidFolder, BiSolidExit } from "react-icons/bi";
+import { IoClose } from 'react-icons/io5';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 
-export const Sidebar = () => {
+interface MenuMobileProps {
+    menuIsVisible: boolean;
+    setMenuIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function MenuHamburguer({ menuIsVisible, setMenuIsVisible }: MenuMobileProps) {
 
     const location = useLocation();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.body.style.overflowY = menuIsVisible ? 'hidden' : 'auto';
+    }, [menuIsVisible]);
 
     const [activeItem, setActiveItem] = useState('project');
+    console.log(activeItem);
 
     useEffect(() => {
         switch (location.pathname) {
@@ -38,10 +46,6 @@ export const Sidebar = () => {
     const handleItemClick = (itemName: string) => {
         setActiveItem(itemName);
     }
-
-    const storedUserInfo = localStorage.getItem('userInfo');
-    const storedUserName = storedUserInfo ? JSON.parse(storedUserInfo).given_name : null;
-
     const handleLogout = async () => {
         const shouldLogout = window.confirm("Tem certeza de que deseja sair?");
 
@@ -55,37 +59,19 @@ export const Sidebar = () => {
             }
         }
     };
-
     return (
-        <S.Wrapper>
-            <S.Title>Olá, {storedUserName || 'Usuário'}</S.Title>
-            <S.Separator />
-            <S.StyledLink to="/forms">
-                <S.ButtonCreateProject >Criar Projeto</S.ButtonCreateProject>
-            </S.StyledLink>
-
-            <S.StyledLink to="/project">
-                <SidebarItem
-                    icon={<BiSolidFolder />}
-                    name="Projetos"
-                    isActive={activeItem === 'project'}
-                    onClick={() => handleItemClick('project')}
-                />
-            </S.StyledLink>
-
-            <S.StyledLink to="/profile">
-                <SidebarItem
-                    icon={<BiSolidUser />}
-                    name="Perfil"
-                    isActive={activeItem === 'profile'}
-                    onClick={() => handleItemClick('profile')}
-                />
-            </S.StyledLink>
-            <SidebarItem
-                icon={<BiSolidExit />}
-                name="Sair"
-                onClick={handleLogout}
-            />
-        </S.Wrapper>
-    );
-};
+        <S.Container isVisible={menuIsVisible}>
+            <IoClose size={45} onClick={() => setMenuIsVisible(false)} />
+            <nav>
+                <S.StyledLink to="/project"
+                    onClick={() => handleItemClick('project')}>
+                    Projetos
+                </S.StyledLink>
+                <S.StyledLink to="/profile" onClick={() => handleItemClick('profile')}>
+                    Perfil
+                </S.StyledLink>
+                <a onClick={handleLogout}>Sair</a>
+            </nav>
+        </S.Container>
+    )
+}
