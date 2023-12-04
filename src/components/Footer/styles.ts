@@ -39,6 +39,13 @@ export const Title = styled.h1`
     color:${(props) => props.theme.colors.white};
 
 `
+export const Title2 = styled.h1`
+    font-size: 0.90rem;
+    font-weight: 700;
+    color:${(props) => props.theme.colors.white};
+
+`
+
 export const ContainerSocialMedia = styled.div`
     display: flex;
     flex-direction: column;
@@ -55,4 +62,5 @@ export const ContainerLinks = styled.div`
 export const StyledLink = styled(Link)`
   text-decoration: none; 
   color: inherit;
+  padding: 5px;
 `

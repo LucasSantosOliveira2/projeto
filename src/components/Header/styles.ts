@@ -36,11 +36,12 @@ export const LoginButton = styled.button`
 export const Menu = styled.ul`
     display: none;
     @media screen and (min-width: 768px) {
+        gap: 20px;
         list-style: none;
         margin: 0;
         padding: 0 5%;
         width: 100%;
-        justify-content: space-evenly;
+        justify-content: left;
         display: flex;
         overflow: hidden;
         font-size: 1.1rem;
@@ -63,4 +64,5 @@ export const Menu = styled.ul`
 export const StyledLink = styled(Link)`
   text-decoration: none; 
   color: inherit;
+  padding: 5px;
 `

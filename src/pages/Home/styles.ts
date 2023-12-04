@@ -20,6 +20,7 @@ export const Header = styled.div`
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    margin-top: 120px
     
 `
 export const Title = styled.h1`
@@ -65,6 +66,7 @@ export const ContainerImage = styled.div`
     @media screen and (min-width: 1920px) {
         height: 780px;
     }
+    margin-top: 140px;
 `
 export const ContainerAbout = styled.div`
     width: 100%;
@@ -85,6 +87,8 @@ export const DescriptionAbout = styled.div`
     margin-bottom: 30px;
     gap: 50px;
     align-items: center;
+    padding-top: 30px;
+
 `
 export const TitleAbout = styled.h1`
     font-size: 1.8rem;

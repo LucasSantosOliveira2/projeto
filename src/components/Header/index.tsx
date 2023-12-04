@@ -11,11 +11,6 @@ export const Header = () => {
                         Home
                     </S.StyledLink>
                 </li>
-
-                <li>
-                    <a>Sobre nós</a>
-                </li>
-
                 <li>
                     <S.StyledLink to="/members" >
                         Membros

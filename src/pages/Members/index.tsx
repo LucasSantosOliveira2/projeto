@@ -28,7 +28,7 @@ export const Members = () => {
                 <S.ContainerCard>
                     <CardMembers
                         image={Malcom}
-                        name="Matheus"
+                        name="Matheus Ribeiro"
                     />
 
                 </S.ContainerCard>
@@ -42,16 +42,19 @@ export const Members = () => {
                         image={Malcom}
                         name="Lucas Santos"
                         description="Aluno do curso de Ciência da Computação na Universidade Federal do Pampa (UNIPAMPA)."
+                        additionalinfo="Contato: lucasso2.aluno@unipampa.edu.br"
                     />
                     <CardMembers
                         image={Malcom}
                         name="Ricardo Costa"
                         description="Aluno do curso de Engenharia de Software na Universidade Federal do Pampa (UNIPAMPA)."
+                        additionalinfo="Contato: ricardohentges.aluno@unipampa.edu.br"
                     />
                     <CardMembers
                         image={Malcom}
                         name="Tales Soares"
                         description="Aluno do curso de Engenharia de Software na Universidade Federal do Pampa (UNIPAMPA)."
+                        additionalinfo="Contato: talessoares.aluno@unipampa.edu.br"
                     />
                 </S.ContainerCard>
             </S.Wrapper>

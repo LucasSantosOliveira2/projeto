@@ -11,6 +11,14 @@ import MouseTrack from "../../assets/Images/mousetrack.png"
 
 
 export const Home = () => {
+
+    const handleScroll = () => {
+        const aboutSection = document.getElementById("aboutSection");
+        if (aboutSection) {
+          aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
     return (
         <>
             <Header />
@@ -19,12 +27,12 @@ export const Home = () => {
                     <S.Title>FAS - Ferramenta de Análise de Sentimentos</S.Title>
                     <S.Description> Compreenda, Extraia e Estude Sentimentos</S.Description>
                 </S.Header>
-                <Button name="Saiba mais" widht="250px" />
+                <Button name="Saiba mais" widht="250px" onClick={handleScroll} />
                 <S.ContainerImage>
                     <S.Image src={FeelingsImage} alt="Sentimentos" />
                 </S.ContainerImage>
                 <S.ContainerAbout>
-                    <S.DescriptionAbout>
+                    <S.DescriptionAbout id="aboutSection">
                         <S.TitleAbout> O que é?</S.TitleAbout>
                         <S.TextAbout>
                             Análise de sentimentos é o processo de analisar um texto digital para determinar se o tom emocional da mensagem é positivo, negativo ou neutro.

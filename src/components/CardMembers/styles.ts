@@ -36,9 +36,9 @@ export const ProfileDescription = styled.p`
     font-size: 0.8rem;
     font-weight: 400;
     text-align:justify;
-    letter-spacing: -0.05em;
+    letter-spacing: 0.05em;
     color: white;
-
+    padding: 10px;
 `
 export const InfoOverlay = styled.div`
   position: absolute;
