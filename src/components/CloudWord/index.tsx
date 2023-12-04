@@ -6,7 +6,7 @@ export const CloudWord = () => {
     const data = [
         { value: 'jQuery', count: 25 },
         { value: 'MongoDB', count: 18 },
-        { value: 'JavaScript', count: 38 },
+        { value: 'JavaScript', count: 50 },
         { value: 'React', count: 30 },
         { value: 'Nodejs', count: 28 },
         { value: 'Express.js', count: 25 },

@@ -21,7 +21,13 @@ const SchemaForm = z.object({
     projectGoal: z.string().min(1, 'Informe o objetivo do projeto'),
     numParticipants: z.number().int().min(1, 'Número de participantes deve ser mínimo 1'),
     analystName: z.record(z.string().min(1, 'Informe o nome do Analista')),
-    tasksName: z.record(z.string().min(1, 'Informe a tarefa do projeto'))
+    tasksName: z.record(z.string().min(1, 'Informe a tarefa do projeto')).refine(tasks => {
+      const taskNames = Object.values(tasks);
+      const uniqueTaskNames = new Set(taskNames);
+      return taskNames.length === uniqueTaskNames.size;
+    }, {
+      message: 'Os nomes das tarefas devem ser únicos',
+    })
   }),
   type: z.object({
     video: z.boolean(),
@@ -231,6 +237,10 @@ function ProjectForm(props: ProjectFormProps) {
               </S.TaskContainer>
               {errors.information?.tasksName && (
                 <S.Error>{errors.information.tasksName[index]?.message}</S.Error>
+              )}
+
+              {errors.information?.tasksName?.message && errors.information.tasksName.message === 'Os nomes das tarefas devem ser únicos' && (
+                <S.Error>Os nomes das tarefas devem ser únicos</S.Error>
               )}
             </S.FieldContainer>
           ))}
