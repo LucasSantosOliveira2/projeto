@@ -17,7 +17,13 @@ export const CloudWord = ({ word, times }: CloudWordProps) => {
     return (
         <S.Wrapper>
             <S.Title>Nuvem de Palavras</S.Title>
-            <TagCloud minSize={12} maxSize={35} tags={cloudData} randomSeed={42} />
+            <TagCloud 
+                minSize={12} 
+                maxSize={35} 
+                tags={cloudData} 
+                randomSeed={42} 
+                onClick={(tag) => alert(`A palavra '${tag.value}' apareceu ${tag.count} vezes!`)}
+            />
         </S.Wrapper>
     );
 }
