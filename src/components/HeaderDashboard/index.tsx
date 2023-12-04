@@ -1,8 +1,6 @@
 import * as S from "./styles";
-import { FaSearch } from "react-icons/fa";
 import { ImMenu } from "react-icons/im";
 import { useLocation } from "react-router-dom";
-import { useUser } from "../UserContext";
 
 function mapPathToPageName(path: string) {
   switch (path) {
@@ -24,7 +22,6 @@ function mapPathToPageName(path: string) {
 export const HeaderDashboard = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const { userData } = useUser();
 
   const pageName = mapPathToPageName(currentPath);
 
