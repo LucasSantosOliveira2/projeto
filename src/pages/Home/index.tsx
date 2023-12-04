@@ -1,10 +1,13 @@
 import * as S from "./styles";
-import FeelingsImage from "../../assets/Images/header.jpg"
-import Analitic from "../../assets/Images/analitic.png"
-import Processing from "../../assets/Images/processing.jpg"
+import FeelingsImage from "../../assets/Images/Sentiment.jpg"
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { CardAnalisys } from "../../components/CardAnalisys";
+import Video from "../../assets/Images/video.png"
+import Voice from "../../assets/Images/voz.png"
+import Text from "../../assets/Images/text.png"
+import MouseTrack from "../../assets/Images/mousetrack.png"
 
 
 export const Home = () => {
@@ -27,21 +30,23 @@ export const Home = () => {
                             Análise de sentimentos é o processo de analisar um texto digital para determinar se o tom emocional da mensagem é positivo, negativo ou neutro.
                         </S.TextAbout>
                     </S.DescriptionAbout>
-                    <S.ImageAbout>
-                        <S.Image src={Analitic} alt="" />
-                    </S.ImageAbout>
-                </S.ContainerAbout>
-                <S.WorksContainer>
                     <S.DescriptionAbout>
                         <S.TitleAbout> Como funciona?</S.TitleAbout>
                         <S.TextAbout>
                             A análise de sentimentos é uma aplicação de tecnologias de processamento de linguagem natural que treinam softwares de computador para entender o texto.
                         </S.TextAbout>
                     </S.DescriptionAbout>
-                    <S.ImageAbout>
-                        <S.Image src={Processing} alt="" />
-                    </S.ImageAbout>
-                </S.WorksContainer>
+                </S.ContainerAbout>
+                <S.DescriptionAbout>
+                    <S.TitleCard>Tipos de Análises</S.TitleCard>
+                    <S.ContainerCard>
+                        <CardAnalisys image={Video} name="Vídeo" />
+                        <CardAnalisys image={Voice} name="Voz" />
+                        <CardAnalisys image={Text} name="Texto" />
+                        <CardAnalisys image={MouseTrack} name="Mousetrack" />
+                    </S.ContainerCard>
+                </S.DescriptionAbout>
+
             </S.Wrapper>
             <Footer />
         </>
