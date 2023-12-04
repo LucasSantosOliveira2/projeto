@@ -24,9 +24,6 @@ export function Graphic({ emotion, percentage }: SentimentProps) {
     },
   };
 
-  console.log('emotion: ' + emotion)
-  console.log('percentage a: ' + percentage)
-
   const formattedData = [
     ["Alegria", percentage[0]],
     ["Medo", percentage[1]],
@@ -36,8 +33,6 @@ export function Graphic({ emotion, percentage }: SentimentProps) {
     ["Surpresa", percentage[5]],
     ["Tristeza", percentage[6]],
   ];
-
-  console.log('formattedData: ' + formattedData)
 
   const combinedData = [["Emoção", "Porcentagem"], ...formattedData];
 

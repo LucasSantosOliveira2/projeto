@@ -150,9 +150,6 @@ function ProjectForm(props: ProjectFormProps) {
     });
   }
 
-  //console.log('Erro de validação das tarefas:', errors);
-
-
   return (
     <S.Form >
       <S.FormContainer>

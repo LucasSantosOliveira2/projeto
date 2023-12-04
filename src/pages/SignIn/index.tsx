@@ -12,7 +12,6 @@ export const SignIn = () => {
 
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
-            console.log(tokenResponse);
 
             try {
                 const userInfoResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
