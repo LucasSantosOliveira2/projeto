@@ -16,8 +16,8 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
     display: flex;
     align-items: flex-start;
-    flex-direction: column;
     justify-content: space-between;
+    width: 100%;
     @media screen and (min-width: 768px) {
         flex-direction: row;
     }
@@ -48,15 +48,11 @@ export const Menu = styled.div`
     align-items: center;
     gap: 20px;
     padding: 10px 10px;
-    width: 60px;
+    width: 100px;
     background-color:#111C44;
     color: white;
     height: 61px;
     border-radius: 32px;
-    @media screen and (max-width: 768px) {
-        width:100%;
-    }
-
 `
 export const InputContainer = styled.div`
     width: 100%;
