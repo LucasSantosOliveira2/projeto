@@ -1,13 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { UserProvider } from '../../projeto/src/components/UserContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UserProvider } from "../../projeto/src/components/UserContext";
 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="1054871656160-fps44iq1in1llfq2vdsbmbhccbbofi1r.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="281018840734-9ibdnrdkq3unapoa8sndmga74i1r66tg.apps.googleusercontent.com">
       <UserProvider>
         <App />
       </UserProvider>
