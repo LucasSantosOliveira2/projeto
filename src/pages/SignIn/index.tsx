@@ -22,7 +22,7 @@ export const SignIn = () => {
 
         const userInfo = userInfoResponse.data;
 
-        fetch("http://10.128.0.4:8080/auth/login", {
+        fetch("http://localhost:8080/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
