@@ -16,7 +16,7 @@ export const Project = () => {
   const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
   useEffect(() => {
-    fetch("http://localhost:8080/project", {
+    fetch(`${process.env.BACK_URL}/project`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,9 @@ export const Project = () => {
               />
             ))
           ) : (
-            <S.ProjectMessage>Não existem projetos no momento.</S.ProjectMessage>
+            <S.ProjectMessage>
+              Não existem projetos no momento.
+            </S.ProjectMessage>
           )}
         </S.InfoContainer>
       </S.ContentContainer>

@@ -22,7 +22,7 @@ export const SignIn = () => {
 
         const userInfo = userInfoResponse.data;
 
-        fetch("http://localhost:8080/auth/login", {
+        fetch(`${process.env.BACK_URL}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

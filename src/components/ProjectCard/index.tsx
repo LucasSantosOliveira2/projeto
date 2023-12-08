@@ -16,7 +16,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
     try {
       // Faça uma solicitação para o endpoint de exclusão
       const response = await fetch(
-        "http://localhost:8080/api/sentimentos/delete",
+        `${process.env.BACK_URL}/api/sentimentos/delete`,
         {
           method: "POST",
           headers: {
@@ -41,7 +41,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const handleEditProject = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/sentimentos/getProject/" + projectId,
+        `${process.env.BACK_URL}/api/sentimentos/getProject/` + projectId,
         {
           method: "GET",
           headers: {
@@ -63,7 +63,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const handleDashboardProject = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/sentimentos/getProject/${projectId}`,
+        `${process.env.BACK_URL}/api/sentimentos/getProject/${projectId}`,
         {
           method: "GET",
           headers: {
@@ -89,16 +89,12 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
         <S.InfoTitle>{title}</S.InfoTitle>
       </S.ContentContainer>
       <S.OptionContainer>
-
-
-      <S.StyledLink to="" onClick={handleDashboardProject}>
+        <S.StyledLink to="" onClick={handleDashboardProject}>
           <S.Option>
-            <HiMiniSquaresPlus />Dashboard
+            <HiMiniSquaresPlus />
+            Dashboard
           </S.Option>
         </S.StyledLink>
-
-
-
 
         <S.StyledLink to="">
           <S.Option onClick={handleEditProject}>
