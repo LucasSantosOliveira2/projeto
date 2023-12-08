@@ -11,7 +11,7 @@ type ProjectCardProps = {
 
 export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const navigate = useNavigate();
-  const url = "http://35.209.202.3";
+  const url = "http://35.209.202.3:8080";
 
   const handleDeleteProject = async () => {
     try {
