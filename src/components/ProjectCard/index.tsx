@@ -11,22 +11,20 @@ type ProjectCardProps = {
 
 export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const navigate = useNavigate();
+  const url = "http://35.209.202.3";
 
   const handleDeleteProject = async () => {
     try {
       // Faça uma solicitação para o endpoint de exclusão
-      const response = await fetch(
-        `${process.env.BACK_URL}/api/sentimentos/delete`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: projectId,
-          }),
-        }
-      );
+      const response = await fetch(`${url}/api/sentimentos/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: projectId,
+        }),
+      });
 
       if (response.ok) {
         window.location.reload();
@@ -41,7 +39,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const handleEditProject = async () => {
     try {
       const response = await fetch(
-        `${process.env.BACK_URL}/api/sentimentos/getProject/` + projectId,
+        `${url}/api/sentimentos/getProject/` + projectId,
         {
           method: "GET",
           headers: {
@@ -63,7 +61,7 @@ export const ProjectCard = ({ title, number, projectId }: ProjectCardProps) => {
   const handleDashboardProject = async () => {
     try {
       const response = await fetch(
-        `${process.env.BACK_URL}/api/sentimentos/getProject/${projectId}`,
+        `${url}/api/sentimentos/getProject/${projectId}`,
         {
           method: "GET",
           headers: {

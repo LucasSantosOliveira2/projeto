@@ -25,6 +25,8 @@ export const Dashboard = () => {
   const [times, setTimes] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<any>("Geral");
 
+  const url = "http://35.209.202.3";
+
   interface Project {
     nomeProjeto: string;
     tarefas: {
@@ -64,15 +66,12 @@ export const Dashboard = () => {
   const { projectId } = location.state || {};
 
   useEffect(() => {
-    fetch(
-      `${process.env.BACK_URL}/api/sentimentos/getProjectAnalises/${projectId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`${url}/api/sentimentos/getProjectAnalises/${projectId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((receivedData) => {
         setData2(receivedData);

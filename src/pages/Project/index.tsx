@@ -11,12 +11,13 @@ interface project {
 
 export const Project = () => {
   const [projects, setProjects] = useState<project[]>([]);
+  const url = "http://35.209.202.3";
 
   const userInfo = window.localStorage.getItem("userInfo");
   const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
   useEffect(() => {
-    fetch(`${process.env.BACK_URL}/project`, {
+    fetch(`${url}/project`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

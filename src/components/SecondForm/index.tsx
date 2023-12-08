@@ -36,6 +36,7 @@ export const SecondForm = (
   props: SecondFormProps & { projectFormData: FormProps }
 ) => {
   const navigate = useNavigate();
+  const url = "http://35.209.202.3";
 
   const {
     handleSubmit,
@@ -105,7 +106,7 @@ export const SecondForm = (
             }
           );
 
-          fetch(`${process.env.BACK_URL}/project/create`, {
+          fetch(`${url}/project/create`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -154,7 +155,7 @@ export const SecondForm = (
               },
             }
           );
-          fetch(`${process.env.BACK_URL}/project/update`, {
+          fetch(`${url}/project/update`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

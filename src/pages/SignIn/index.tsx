@@ -10,6 +10,8 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
 
+  const url = "http://35.209.202.3";
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
@@ -22,7 +24,7 @@ export const SignIn = () => {
 
         const userInfo = userInfoResponse.data;
 
-        fetch(`${process.env.BACK_URL}/auth/login`, {
+        fetch(`${url}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
