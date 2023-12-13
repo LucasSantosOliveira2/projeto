@@ -25,7 +25,7 @@ export const Dashboard = () => {
   const [times, setTimes] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<any>("Geral");
 
-  const url = "https://35.209.202.3:8080";
+  const url = "http://35.209.202.3:8080";
 
   interface Project {
     nomeProjeto: string;

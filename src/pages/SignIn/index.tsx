@@ -10,7 +10,7 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
 
-  const url = "https://35.209.202.3:8080";
+  const url = "http://35.209.202.3:8080";
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
