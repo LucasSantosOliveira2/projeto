@@ -36,7 +36,7 @@ export const SecondForm = (
   props: SecondFormProps & { projectFormData: FormProps }
 ) => {
   const navigate = useNavigate();
-  const url = "http://35.209.202.3:8080";
+  const url = "https://35.209.202.3:8080";
 
   const {
     handleSubmit,
