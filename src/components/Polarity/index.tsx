@@ -2,6 +2,7 @@ import * as S from "./styles";
 import AlegriaImage from "../../assets/Images/Alegria.png";
 import OutrosImage from "../../assets/Images/Outros.png";
 import TristezaImage from "../../assets/Images/Tristeza.png";
+import ProgressBarComponent from "../ProgressBar";
 
 type PolarityProps = {
     polarity: string;
@@ -50,6 +51,7 @@ export const Polarity = ({ polarity, percentage }: PolarityProps) => {
             </S.Title>
             <S.ContainerContent>
                 <S.Emoji style={{ backgroundImage: `url(${polarityImage})` }}></S.Emoji>
+                <ProgressBarComponent percentage={Number(percentageFinal)} polarity={polarity as "pos" | "neu" | "neg"}  />
                 <S.Emotion>{polarityName} <span>{percentageFinal}%</span></S.Emotion>
             </S.ContainerContent>
         </S.Wrapper>

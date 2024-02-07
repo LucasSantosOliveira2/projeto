@@ -3,6 +3,8 @@ import { Sidebar } from "../../components/Sidebar";
 import { HeaderDashboard } from "../../components/HeaderDashboard";
 import { Graphic } from "../../components/Graphic";
 import { PredominantSentiment } from "../../components/PredominantSentiment";
+import { ButtonDashboard } from "../../components/DashboardComponents/ButtonDashboard";
+import { CardTitle } from "../../components/DashboardComponents/CardTitle";
 import { CloudWord } from "../../components/CloudWord";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -159,50 +161,67 @@ export const Dashboard = () => {
         <HeaderDashboard />
       </S.SidebarContainer>
       <S.ContentContainer>
-        <S.CustomSelect>
-          <S.Title>Tarefas</S.Title>
-          <Select
-            options={
-              data2 && data2.tarefas
-                ? data2.tarefas.map((task, index) => ({
-                    value: index,
-                    label: task.nome,
-                  }))
-                : []
-            }
-            defaultValue={selectedOption}
-            onChange={handleChange}
-            placeholder="Selecione uma tarefa"
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                direction: "ltr",
-                borderColor: state.isFocused ? "#7551FF" : "#1f0099",
-                backgroundColor: "#111C44",
-                color: "white",
-              }),
-              menu: (baseStyles) => ({
-                ...baseStyles,
-                backgroundColor: "#111C44",
-                color: "white",
-              }),
-              option: (baseStyles, state) => ({
-                ...baseStyles,
-                backgroundColor: state.isFocused ? "#7551FF" : "#111C44",
-                color: "white",
-              }),
-              singleValue: (baseStyles) => ({
-                ...baseStyles,
-                color: "white",
-              }),
-              placeholder: (baseStyles) => ({
-                ...baseStyles,
-                color: "white",
-              }),
-            }}
-          />
-        </S.CustomSelect>
+        <S.ContainerInfo>
+          <CardTitle title={data2?.nomeProjeto} width="250px" />
+          <S.CustomSelect>
+            <S.Label>Tarefas</S.Label>
+            <Select
+              options={
+                data2 && data2.tarefas
+                  ? data2.tarefas.map((task, index) => ({
+                      value: index,
+                      label: task.nome,
+                    }))
+                  : []
+              }
+              defaultValue={selectedOption}
+              onChange={handleChange}
+              placeholder="Selecione"
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  direction: "ltr",
+                  border: "none", 
+                  boxShadow: "none", 
+                  backgroundColor: "#111C44",
+                  color: "white",
+                  "&:hover": {
+                    cursor: "pointer", 
+                  },
+                }),
+                menu: (baseStyles) => ({
+                  ...baseStyles,
+                  backgroundColor: "#111C44",
+                  color: "white",
+                }),
+                option: (baseStyles, state) => ({
+                  ...baseStyles,
+                  backgroundColor: state.isFocused ? "#7551FF" : "#111C44",
+                  color: "white",
+                }),
+                singleValue: (baseStyles) => ({
+                  ...baseStyles,
+                  color: "white",
+                }),
+                placeholder: (baseStyles) => ({
+                  ...baseStyles,
+                  color: "white",
+                }),
+                dropdownIndicator: (base, state) => ({
+                  ...base,
+                  color: "white",
+                  "&:hover": {
+                    color: "#A3AED0",
+                  },
+                }),
+              }}
+            />
+          </S.CustomSelect>
 
+          <ButtonDashboard name="Exportar" widht="200px" action="export" onClick={() => redirect("exportar")} />
+          <ButtonDashboard name="Editar" widht="200px" action="edit" onClick={() => redirect("editar")} />
+          <ButtonDashboard name="Excluir" widht="200px" action="delete" onClick={() => redirect("excluir")} />
+        </S.ContainerInfo>
         <S.ContainerInfo>
           <PredominantSentiment
             emotion={dominantEmotion}

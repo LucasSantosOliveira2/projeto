@@ -72,8 +72,18 @@ export const ContainerInfo = styled.div`
   }
 `
 export const CustomSelect = styled.div`
-  width: 300px;
-  margin-right: 68%;
-  margin-top: 0.2%;
-  z-index: 2;
+    width: 250px;
+    padding: 10px 20px;
+    /* margin-top: 0.2%; */
+    z-index: 2;
+    background: #111C44;
+    border-radius: 16px;
+    height: 70px;
 `;
+
+export const Label = styled.p`
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #A3AED0;
+  padding: 0 8px;
+`
